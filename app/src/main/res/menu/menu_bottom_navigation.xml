@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:checked="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/uang_jalan"
+        android:checked="false"
+        android:icon="@drawable/ic_baseline_monetization_on_24"
+        android:title="Uang Jalan"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/setoran"
+        android:checked="false"
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:title="Setoran"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/profil"
+        android:checked="false"
+        android:icon="@drawable/ic_baseline_supervised_user_circle_24"
+        android:title="Profil"
+        app:showAsAction="ifRoom" />
+</menu>

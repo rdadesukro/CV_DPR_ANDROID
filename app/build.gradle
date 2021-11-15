@@ -1,0 +1,124 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdk 30
+
+    defaultConfig {
+        applicationId "com.example.cv_dpr"
+        minSdk 23
+        targetSdk 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+ 
+
+    //desain
+    implementation 'com.google.android.material:material:1.1.0-alpha10'
+
+    //butterknife
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+
+    //viewvager
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:3.3.0"
+
+    //foto
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    // annotationProcessor 'com.github.bumptech.glide:compiler:b4.9.0'
+
+    //lokasi
+    //noinspection GradleCompatible
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+
+
+    //camera kit
+    implementation 'com.camerakit:camerakit:1.0.0-beta3.10'
+    implementation 'com.camerakit:jpegkit:0.1.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0'
+
+    //validasi
+    implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
+
+    //sweetalert
+    implementation 'com.github.f0ris.sweetalert:library:1.5.6'
+    implementation 'com.afollestad.material-dialogs:core:0.9.4.5'
+
+//    //Toast
+//    implementation 'com.github.imjeevandeshmukh:GlideToast:1.0'
+
+    //spiner
+
+    //image_Slider
+    implementation 'com.github.smarteist:autoimageslider:1.3.5'
+
+//    //guru
+//    implementation 'com.github.squti:Guru:1.0.1'
+
+    //firbase auth
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    implementation 'com.google.android.gms:play-services-identity:17.0.0'
+
+//    //photoview
+//    implementation 'com.github.chrisbanes:PhotoView:2.1.3'
+
+    //
+    implementation 'com.github.igortrncic.dotted-progress-bar:library:1.0.0'
+
+    //notif
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+    implementation 'com.google.firebase:firebase-core:16.0.4'
+
+    //dexter
+    implementation 'com.karumi:dexter:6.2.1'
+
+    //responsif
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
+    //apk apdate
+//    implementation 'com.github.javiersantos:AppUpdater:2.7'
+
+    //smarttablaout
+    implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
+
+
+
+}

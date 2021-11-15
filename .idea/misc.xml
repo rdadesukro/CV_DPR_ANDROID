@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/CV_DPR/app/src/main/res/drawable/bottom_navigation_color_selector.xml" value="0.2101851851851852" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_harga.xml" value="0.19010416666666666" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_home.xml" value="0.16" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_mobil.xml" value="0.20416666666666666" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_pemilik_mobil.xml" value="0.20416666666666666" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_setoran.xml" value="0.25" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_transportir.xml" value="0.20416666666666666" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_uang_jalan.xml" value="0.25" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_utama.xml" value="0.2" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/model_setoran.xml" value="0.33" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/model_uang_jalan.xml" value="0.25" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/model_uang_jalan_new.xml" value="0.33" />
+        <entry key="..\:/CV_DPR/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.20416666666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

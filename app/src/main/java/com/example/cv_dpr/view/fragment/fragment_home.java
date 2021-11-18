@@ -10,6 +10,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.cv_dpr.R;
+import com.example.cv_dpr.view.activity.menu_mobil;
 
 import butterknife.ButterKnife;
 
@@ -65,13 +66,13 @@ public class fragment_home extends Fragment {
         cardTugas =  v.findViewById(R.id.card_tugas);
         cardMateri =  v.findViewById(R.id.card_materi);
 
-//        cardMateri.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent materi = new Intent(getActivity(), menu_materi_pertemuan.class);
-//               startActivity(materi);
-//            }
-//        });
+        cardMateri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent materi = new Intent(getActivity(), menu_mobil.class);
+               startActivity(materi);
+            }
+        });
 //        cardTugas.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

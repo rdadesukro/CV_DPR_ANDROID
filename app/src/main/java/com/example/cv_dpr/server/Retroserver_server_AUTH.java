@@ -13,7 +13,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Retroserver_server_AUTH {
-    private  static  final String base_url = "http://192.168.43.48/cv_dpr/public/api/";
+    private  static  final String base_url = "http://10.1.4.63/cv_dpr/public/api/";
 
 
     public static Retrofit getClient() {

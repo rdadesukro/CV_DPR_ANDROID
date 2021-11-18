@@ -10,6 +10,37 @@ public class DataSetoranItem{
 	@SerializedName("jumlah_kotor")
 	private int jumlahKotor;
 
+	public String getUang_jalan_new() {
+		return uang_jalan_new;
+	}
+
+	public void setUang_jalan_new(String uang_jalan_new) {
+		this.uang_jalan_new = uang_jalan_new;
+	}
+
+	@SerializedName("uang_jalan_new")
+	private String uang_jalan_new;
+
+	String jumlah_kotor_new;
+
+	public String getJumlah_kotor_new() {
+		return jumlah_kotor_new;
+	}
+
+	public void setJumlah_kotor_new(String jumlah_kotor_new) {
+		this.jumlah_kotor_new = jumlah_kotor_new;
+	}
+
+	public String getJumlah_bersih_new() {
+		return jumlah_bersih_new;
+	}
+
+	public void setJumlah_bersih_new(String jumlah_bersih_new) {
+		this.jumlah_bersih_new = jumlah_bersih_new;
+	}
+
+	String jumlah_bersih_new;
+
 	@SerializedName("berat_muat")
 	private String beratMuat;
 

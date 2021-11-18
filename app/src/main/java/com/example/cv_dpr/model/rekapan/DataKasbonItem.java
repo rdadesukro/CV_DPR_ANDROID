@@ -10,6 +10,10 @@ public class DataKasbonItem{
 	@SerializedName("pemilik_mobil_id")
 	private int pemilikMobilId;
 
+
+
+
+
 	@SerializedName("jumlah_uang")
 	private int jumlahUang;
 

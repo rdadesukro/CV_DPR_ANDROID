@@ -58,7 +58,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:3.3.0"
 
     //foto
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
+   // implementation 'com.github.bumptech.glide:glide:4.9.0'
     // annotationProcessor 'com.github.bumptech.glide:compiler:b4.9.0'
 
     //lokasi
@@ -119,6 +119,12 @@ dependencies {
     //smarttablaout
     implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
 
+     //spiner
+    implementation project(path: ':spiner')
 
+    //pdf view
+    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    implementation 'es.voghdev.pdfviewpager:library:1.1.2'
 
 }

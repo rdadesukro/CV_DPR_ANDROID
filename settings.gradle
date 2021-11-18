@@ -8,3 +8,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "CV_DPR"
 include ':app'
+include ':app:spiner_dialog'
+include ':spinner_dialog'
+include ':sipnner_dialog'
+include ':spiner'

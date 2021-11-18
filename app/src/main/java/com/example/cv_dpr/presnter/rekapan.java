@@ -33,18 +33,53 @@ public class rekapan {
         }
     }
 
-    public void get_history() {
+    public void get_uang_jalan(String tanggal) {
         ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
         Log.i("isi_server", "isi_server: "+Retroserver_server_AUTH.getClient().baseUrl());
 
-        Call<Response_rekapan> call;
+        Call<Response_rekapan> call = api.get_uang_jalan(tanggal);
+        call.enqueue(new Callback<Response_rekapan>() {
+            @Override
+            public void onResponse(Call<Response_rekapan> call, Response<Response_rekapan> response) {
 
-            call = api.get_rekapan();
+                try {
 
+                    if (response.isSuccessful()) {
+                        Response_rekapan data = response.body();
+                        countryView.total_uang_jalan(data.getTotalUangJalan());
+                        //Toast.makeText(ctx, ""+ response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.i("isi_data", "onResponse: "+data);
+                        if (data != null && data.getDataSetoran() != null) {
+                            List<DataSetoranItem> result = data.getDataSetoran();
+                            countryView.rekapan(result);
+                        }
+                    }
+                } catch (Exception e) {
+                    Log.e("onResponse", "There is an error" + e);
+                    e.printStackTrace();
+                }
 
+            }
 
+            @Override
+            public void onFailure(Call<Response_rekapan> call, Throwable t) {
+                t.printStackTrace();
+                Log.i("cek_error", "onFailure: " + t);
+                if (t instanceof IOException) {
 
+                    Log.i("cek_error", "onFailure: " + t);
+                } else {
 
+                    Log.i("cek_error", "onFailure: " + t);
+                }
+            }
+        });
+    }
+    public void get_setoran() {
+        ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
+        Log.i("isi_server", "isi_server: "+Retroserver_server_AUTH.getClient().baseUrl());
+
+        Call<Response_rekapan> call = api.get_setoran();
         call.enqueue(new Callback<Response_rekapan>() {
             @Override
             public void onResponse(Call<Response_rekapan> call, Response<Response_rekapan> response) {

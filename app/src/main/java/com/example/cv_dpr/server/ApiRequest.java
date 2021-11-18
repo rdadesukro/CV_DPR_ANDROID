@@ -5,6 +5,7 @@ package com.example.cv_dpr.server;
 
 
 import com.example.cv_dpr.model.rekapan.Response_rekapan;
+import com.example.cv_dpr.model.rekapan.mobil.Response_mobil;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -100,8 +101,15 @@ public interface ApiRequest {
 //    @GET("balita/perkembangan/{tgl_lahir}")
 //    Call<Response_pertanyaan> get_pertanyaan(@Path("tgl_lahir") String tgl_lahir);
 //
-    @GET("auth/tampil_uang_jalan")
-    Call<Response_rekapan> get_rekapan();
+    @FormUrlEncoded
+    @POST("auth/tampil_uang_jalan")
+    Call<Response_rekapan> get_uang_jalan(@Field("tanggal") String tanggal);
+
+    @GET("auth/tampil_setoran")
+    Call<Response_rekapan> get_setoran();
+
+    @GET("auth/tampil_mobil")
+    Call<Response_mobil> get_mobil();
 //
 //
 //    @GET("user/jawaban/histori/admin")

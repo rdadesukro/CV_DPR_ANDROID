@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.cv_dpr.R;
-import com.example.cv_dpr.adapter.adapter_rekapan;
+import com.example.cv_dpr.adapter.adapter_setoran;
+import com.example.cv_dpr.adapter.adapter_uang_jalan;
 import com.example.cv_dpr.model.rekapan.DataKasbonItem;
 import com.example.cv_dpr.model.rekapan.DataSetoranItem;
 import com.example.cv_dpr.presnter.rekapan;
@@ -26,7 +27,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 
-public class fragment_setoran extends Fragment implements rekapan_view, adapter_rekapan.OnImageClickListener {
+public class fragment_setoran extends Fragment implements rekapan_view, adapter_setoran.OnImageClickListener {
 
 
     private SwipeRefreshLayout swifeRefresh;
@@ -36,7 +37,7 @@ public class fragment_setoran extends Fragment implements rekapan_view, adapter_
     private ProgressBar progressBar4;
 
     com.example.cv_dpr.presnter.rekapan rekapan;
-    private adapter_rekapan adapter_rekapan;
+    private adapter_setoran adapter_setoran;
     private TextView txtTotol;
 
     public fragment_setoran() {
@@ -57,12 +58,12 @@ public class fragment_setoran extends Fragment implements rekapan_view, adapter_
         ButterKnife.bind(this, view);
         initView(view);
         rekapan = new rekapan(this, getActivity());
-        rekapan.get_history();
+        rekapan.get_setoran();
 
         swifeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                rekapan.get_history();
+                rekapan.get_setoran();
 
             }
         });
@@ -95,26 +96,18 @@ public class fragment_setoran extends Fragment implements rekapan_view, adapter_
         txtTotol = (TextView) v.findViewById(R.id.txt_totol);
     }
 
-    @Override
-    public void onImageClick(int id, String nama, String alamat) {
 
-    }
-
-    @Override
-    public void lihat_gambar(int id, String gambar, ImageView foto) {
-
-    }
 
     @Override
     public void rekapan(List<DataSetoranItem> rekapan) {
         try {
             Log.i("isi_jawaban", "pertanyaan: " + rekapan);
             Log.i("cek_data_pertanyaan", "event: " + rekapan.size());
-            adapter_rekapan = new adapter_rekapan(getActivity(), rekapan, 1, this);
+             adapter_setoran = new adapter_setoran(getActivity(), rekapan, 1, this);
             rvAku.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
             rvAku.setHasFixedSize(true);
-            adapter_rekapan.notifyDataSetChanged();
-            rvAku.setAdapter(adapter_rekapan);
+            adapter_setoran.notifyDataSetChanged();
+            rvAku.setAdapter(adapter_setoran);
 
 
             swifeRefresh.setRefreshing(false);
@@ -139,6 +132,16 @@ public class fragment_setoran extends Fragment implements rekapan_view, adapter_
 
     @Override
     public void kasbon(List<DataKasbonItem> kasbon) {
+
+    }
+
+    @Override
+    public void edit(int id, String nama_sopir, int uang_jalan) {
+
+    }
+
+    @Override
+    public void hapus(int id) {
 
     }
 }

@@ -110,7 +110,7 @@ public class menu_utama extends AppCompatActivity {
 
         adapter.addFragment(home);
         adapter.addFragment(uang_jalan);
-
+        adapter.addFragment(setoran);
 
         viewPager.setAdapter(adapter);
     }

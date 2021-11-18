@@ -11,6 +11,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/app/spiner_dialog" />
+            <option value="$PROJECT_DIR$/sipnner_dialog" />
+            <option value="$PROJECT_DIR$/spiner" />
+            <option value="$PROJECT_DIR$/spinner_dialog" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

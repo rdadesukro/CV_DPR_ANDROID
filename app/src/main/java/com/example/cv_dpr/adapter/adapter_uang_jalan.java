@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class adapter_rekapan extends RecyclerView.Adapter<adapter_rekapan.HolderData> {
+public class adapter_uang_jalan extends RecyclerView.Adapter<adapter_uang_jalan.HolderData> {
     private static CountDownTimer countDownTimer;
     String kriim;
     String lat_new,lng_new;
@@ -35,7 +35,7 @@ public class adapter_rekapan extends RecyclerView.Adapter<adapter_rekapan.Holder
     private List<DataSetoranItem> mList ;
     private Context ctx;
     private OnImageClickListener onImageClickListener;
-    public adapter_rekapan(Context ctx, List<DataSetoranItem> mList , int animation_type, OnImageClickListener onImageClickListener) {
+    public adapter_uang_jalan(Context ctx, List<DataSetoranItem> mList , int animation_type, OnImageClickListener onImageClickListener) {
         this.jenis = jenis;
         this.animation_type = animation_type;
         this.mList = mList;
@@ -44,10 +44,8 @@ public class adapter_rekapan extends RecyclerView.Adapter<adapter_rekapan.Holder
 
     }
     public interface OnImageClickListener {
-        void onImageClick(int id,
-                          String nama,
-                          String alamat);
-        void lihat_gambar(int id, String gambar,ImageView foto);
+        void edit(int id, String nama_sopir,int uang_jalan);
+        void hapus(int id);
     }
 
 
@@ -71,8 +69,9 @@ public class adapter_rekapan extends RecyclerView.Adapter<adapter_rekapan.Holder
         final DataSetoranItem dm = mList.get(position);
 
         holder.txt_nama.setText(dm.getMobil().getNamaSopir());
-        holder.txt_uang_jalan.setText(""+dm.getUangJalan());
+        holder.txt_uang_jalan.setText(""+dm.getUang_jalan_new());
         holder.txt_tgl.setText(dm.getTglAmbilUangJalan());
+
 
 
 
@@ -115,7 +114,6 @@ public class adapter_rekapan extends RecyclerView.Adapter<adapter_rekapan.Holder
 
 
         DataSetoranItem dm;
-
         int pos;
 
 

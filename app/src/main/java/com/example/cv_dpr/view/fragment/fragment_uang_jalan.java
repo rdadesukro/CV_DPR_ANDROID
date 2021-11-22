@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -70,6 +71,7 @@ public class fragment_uang_jalan extends Fragment implements mobil_view,rekapan_
     BottomSheetDialog bittom_dialog;
     com.example.cv_dpr.presnter.mobil mobil;
     ProgressDialog pd;
+   public EditText edit_nama_sopir, edit_nama_pemilik_mobil;
     public fragment_uang_jalan() {
         // Required empty public constructor
     }
@@ -119,7 +121,7 @@ public class fragment_uang_jalan extends Fragment implements mobil_view,rekapan_
 
         };
         rekapan = new rekapan(this, getActivity());
-        mobil = new mobil(null, getActivity());
+        mobil = new mobil(this, getActivity());
         rekapan.get_uang_jalan(tanggal);
 
         swifeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -252,10 +254,9 @@ public class fragment_uang_jalan extends Fragment implements mobil_view,rekapan_
         bittom_dialog.getWindow().setDimAmount(0.5f);
         lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        EditText edit_sopir =  bittom_dialog.findViewById(R.id.edit_sopir);
-//        ImageView btn_camera = (ImageView) bittom_dialog.findViewById(R.id.btn_camera);
-//        ImageView btn_galeri = (ImageView) bittom_dialog.findViewById(R.id.btn_galeri);
-        edit_sopir.setOnClickListener(new View.OnClickListener() {
+        edit_nama_sopir =  bittom_dialog.findViewById(R.id.edit_sopir);
+        edit_nama_pemilik_mobil =  bittom_dialog.findViewById(R.id.edit_pemilik_mobil);
+        edit_nama_sopir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bittom_dialog.dismiss();
@@ -269,9 +270,12 @@ public class fragment_uang_jalan extends Fragment implements mobil_view,rekapan_
         bittom_dialog.show();
     }
 
+
     @Override
-    public void data_sopir(String nama_sopir, String nama_pemilik_mobil, String pemilik_mobil_id) {
-        
+    public void data_sopir(String nama_sopir, String nama_pemilik_mobil, int pemilik_mobil_id, int mobil_id) {
+        Toast.makeText(getActivity(), ""+nama_pemilik_mobil+" "+nama_sopir, Toast.LENGTH_SHORT).show();
+        edit_nama_sopir.setText(nama_sopir);
+        edit_nama_pemilik_mobil.setText(nama_pemilik_mobil);
 
     }
 }

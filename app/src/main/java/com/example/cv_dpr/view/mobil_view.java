@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface mobil_view {
 
-    void data_sopir(String nama_sopir, String nama_pemilik_mobil,String pemilik_mobil_id);
+    void data_sopir(String nama_sopir, String nama_pemilik_mobil,int pemilik_mobil_id,int mobil_id);
 
 
 

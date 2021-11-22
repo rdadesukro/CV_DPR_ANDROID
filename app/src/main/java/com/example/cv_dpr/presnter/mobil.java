@@ -35,10 +35,11 @@ public class mobil {
     private Retroserver_server_AUTH countryService;
     SpinnerDialog spinnerDialog;
     String nama_sopir,nama_pemilik_mobil;
-    int id_pemilik_mobil;
-    private List<String> results = new ArrayList<String>();
-    private List<String> results1 = new ArrayList<String>();
-    private List<String> results2 = new ArrayList<String>();
+    int id_pemilik_mobil,id_mobil;
+    private List<String> nama_sopir_array = new ArrayList<String>();
+    private List<String> nama_pemilik_mobil_array = new ArrayList<String>();
+    private List<Integer> pemilik_mobil_id= new ArrayList<Integer>();
+    private List<Integer> mobil_id = new ArrayList<Integer>();
     public mobil(mobil_view view, Context ctx) {
         this.countryView = view;
         this.ctx = ctx;
@@ -55,28 +56,40 @@ public class mobil {
             @Override
             public void onResponse(Call<Response_mobil> call, Response<Response_mobil> response) {
 
-                results = new ArrayList();
+
 
                 Response_mobil data = response.body();
                 List<DataMobilItem> result = data.getDataMobil();
+                nama_sopir_array.clear();
+                nama_pemilik_mobil_array.clear();
+                pemilik_mobil_id.clear();
+                mobil_id.clear();
+
+
 
                 for (int i = 0; i < result.size(); i++) {
                     id_pemilik_mobil = result.get(i).getPemilikMobilId();
+                    id_mobil = result.get(i).getId();
                     nama_sopir = result.get(i).getNamaSopir();
-                    nama_pemilik_mobil = result.get(i).getPemilikMobil().get(i).getNama();
-                    results.add(result.get(i).getNamaSopir());
-                    results1.add(result.get(i).getNamaSopir());
-                    results.add(result.get(i).getNamaSopir());
+                    nama_pemilik_mobil = result.get(i).getPemilikMobil().get(0).getNama();
+                    nama_sopir_array.add(nama_sopir);
+                    nama_pemilik_mobil_array.add(nama_pemilik_mobil);
+                    pemilik_mobil_id.add(id_pemilik_mobil);
+                    mobil_id.add(id_mobil);
 
                 }
                // pd.dismiss();
-                spinnerDialog = new SpinnerDialog((AppCompatActivity) ctx, (ArrayList<String>) results, "Pilih Sopir Mobil");
+                spinnerDialog = new SpinnerDialog((AppCompatActivity) ctx, (ArrayList<String>) nama_sopir_array, "Pilih Sopir Mobil");
                 spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
                     @Override
                     public void onClick(String item, int position) {
-
-                        Toast.makeText(ctx, ""+results.get(position), Toast.LENGTH_SHORT).show();
-                        countryView.data_sopir(nama_sopir,nama_pemilik_mobil, String.valueOf(id_pemilik_mobil));
+                        String nama_sop = nama_sopir_array.get(position);
+                        String nama_pemilik = nama_pemilik_mobil_array.get(position);
+                        int id_pemilik = pemilik_mobil_id.get(position);
+                        int id_mobil = mobil_id.get(position);
+                        Toast.makeText(ctx, ""+nama_sopir_array.get(position), Toast.LENGTH_SHORT).show();
+                      //  Log.i("Data_mobil", "onClick: "+nama_sop+" "+nama_pemilik+" "+id_pemilik+" "+id_mobil);
+                        countryView.data_sopir(nama_sop,nama_pemilik,id_pemilik,id_mobil);
 
 
 

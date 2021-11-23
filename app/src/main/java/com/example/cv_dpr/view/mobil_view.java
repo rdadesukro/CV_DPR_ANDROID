@@ -3,7 +3,7 @@ package com.example.cv_dpr.view;
 
 import com.example.cv_dpr.model.rekapan.DataKasbonItem;
 import com.example.cv_dpr.model.rekapan.DataSetoranItem;
-import com.example.cv_dpr.model.rekapan.mobil.DataMobilItem;
+import com.example.cv_dpr.model.mobil.DataMobilItem;
 
 import java.util.List;
 
@@ -18,6 +18,10 @@ import java.util.List;
 public interface mobil_view {
 
     void data_sopir(String nama_sopir, String nama_pemilik_mobil,int pemilik_mobil_id,int mobil_id);
+
+    void sukses(String pesan);
+    void gagal(String pesan);
+
 
 
 

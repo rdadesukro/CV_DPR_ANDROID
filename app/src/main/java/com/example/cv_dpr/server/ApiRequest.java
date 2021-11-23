@@ -5,7 +5,7 @@ package com.example.cv_dpr.server;
 
 
 import com.example.cv_dpr.model.rekapan.Response_rekapan;
-import com.example.cv_dpr.model.rekapan.mobil.Response_mobil;
+import com.example.cv_dpr.model.mobil.Response_mobil;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -104,6 +104,20 @@ public interface ApiRequest {
     @FormUrlEncoded
     @POST("auth/tampil_uang_jalan")
     Call<Response_rekapan> get_uang_jalan(@Field("tanggal") String tanggal);
+
+    @FormUrlEncoded
+    @POST("auth/simpan_setoran")
+    Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> simpan_uang_jalan(@Field("mobil_id") int mobil_id,
+                                                                                @Field("pemilik_mobil_id") int pemilik_mobil_id,
+                                                                                @Field("uang_jalan") String uang_jalan);
+
+
+    @FormUrlEncoded
+    @POST("auth/edit_uang_jalan")
+    Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> edit_uang_jalan(@Field("mobil_id") int mobil_id,
+                                                                                @Field("pemilik_mobil_id") int pemilik_mobil_id,
+                                                                                @Field("uang_jalan") String uang_jalan,
+                                                                              @Field("id") String id);
 
     @GET("auth/tampil_setoran")
     Call<Response_rekapan> get_setoran();

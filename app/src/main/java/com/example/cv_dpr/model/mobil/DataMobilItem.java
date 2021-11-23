@@ -1,4 +1,4 @@
-package com.example.cv_dpr.model.rekapan.mobil;
+package com.example.cv_dpr.model.mobil;
 
 import java.util.List;
 import com.google.gson.annotations.SerializedName;

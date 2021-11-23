@@ -53,7 +53,7 @@ import javax.net.ssl.SSLContext;
 import butterknife.ButterKnife;
 
 
-public class fragment_uang_jalan extends Fragment implements mobil_view,rekapan_view, adapter_uang_jalan.OnImageClickListener {
+public class fragment_uang_jalan extends Fragment implements rekapan_view, adapter_uang_jalan.OnImageClickListener {
 
 
     private SwipeRefreshLayout swifeRefresh;
@@ -103,7 +103,9 @@ public class fragment_uang_jalan extends Fragment implements mobil_view,rekapan_
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date(System.currentTimeMillis());
         tanggal = formatter.format(date);
-
+        updateLabel();
+        rekapan = new rekapan(this, getActivity());
+        rekapan.get_uang_jalan(tanggal);
         tg = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -120,9 +122,7 @@ public class fragment_uang_jalan extends Fragment implements mobil_view,rekapan_
             }
 
         };
-        rekapan = new rekapan(this, getActivity());
-        mobil = new mobil(this, getActivity());
-        rekapan.get_uang_jalan(tanggal);
+
 
         swifeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -135,7 +135,13 @@ public class fragment_uang_jalan extends Fragment implements mobil_view,rekapan_
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBottomSheetDialog();
+                Bundle args = new Bundle();
+                args.putString("jenis","new");
+
+                fragment_add_edit_uang_jalan newFragment = new fragment_add_edit_uang_jalan();
+                newFragment.setArguments(args);
+                newFragment.show(getActivity().getSupportFragmentManager(), "TAG");
+
             }
         });
 
@@ -209,7 +215,22 @@ public class fragment_uang_jalan extends Fragment implements mobil_view,rekapan_
     }
 
     @Override
-    public void edit(int id, String nama_sopir, int uang_jalan) {
+    public void edit(int id, int id_sopir,int uang_jalan,int id_pemilik_mobil,String nama_sopir,String nama_pemilik_mobil) {
+//        fragment_add_edit_uang_jalan dialog1 = new fragment_add_edit_uang_jalan(nama_sopir,nama_sopir);
+//        dialog1.setTargetFragment(fragment_uang_jalan.this, 22); // in case of fragment to activity communication we do not need this line. But must write this i case of fragment to fragment communication
+//        dialog1.show(getFragmentManager(), "fragment_camera");
+        Bundle args = new Bundle();
+        args.putString("id", String.valueOf(id));
+        args.putString("id_sopir", String.valueOf(id_sopir));
+        args.putString("uang_jalan", String.valueOf(uang_jalan));
+        args.putString("id_pemilik_mobil", String.valueOf(id_pemilik_mobil));
+        args.putString("nama_sopir",nama_sopir);
+        args.putString("nama_pemilik_mobil",nama_pemilik_mobil);
+        args.putString("jenis","edit");
+
+        fragment_add_edit_uang_jalan newFragment = new fragment_add_edit_uang_jalan();
+        newFragment.setArguments(args);
+        newFragment.show(getActivity().getSupportFragmentManager(), "TAG");
 
     }
 
@@ -240,42 +261,6 @@ public class fragment_uang_jalan extends Fragment implements mobil_view,rekapan_
         tanggal = sdf.format(myCalendar.getTime());
     }
 
-    private void showBottomSheetDialog() {
-
-        bittom_dialog = new BottomSheetDialog(getActivity());
-        bittom_dialog.setTitle("Login");
-        bittom_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        bittom_dialog.setContentView(R.layout.dialog_uang_jalan_new);
-        bittom_dialog.setCancelable(true);
-
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        bittom_dialog.getWindow().setAttributes(lp);
-        bittom_dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        bittom_dialog.getWindow().setDimAmount(0.5f);
-        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        edit_nama_sopir =  bittom_dialog.findViewById(R.id.edit_sopir);
-        edit_nama_pemilik_mobil =  bittom_dialog.findViewById(R.id.edit_pemilik_mobil);
-        edit_nama_sopir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bittom_dialog.dismiss();
-                mobil.get_mobil(pd);
 
 
-            }
-        });
-
-
-        bittom_dialog.show();
-    }
-
-
-    @Override
-    public void data_sopir(String nama_sopir, String nama_pemilik_mobil, int pemilik_mobil_id, int mobil_id) {
-        Toast.makeText(getActivity(), ""+nama_pemilik_mobil+" "+nama_sopir, Toast.LENGTH_SHORT).show();
-        edit_nama_sopir.setText(nama_sopir);
-        edit_nama_pemilik_mobil.setText(nama_pemilik_mobil);
-
-    }
 }

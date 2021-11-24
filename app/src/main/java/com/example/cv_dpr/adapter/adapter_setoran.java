@@ -41,7 +41,7 @@ public class adapter_setoran extends RecyclerView.Adapter<adapter_setoran.Holder
 
     }
     public interface OnImageClickListener {
-        void edit(int id, String nama_sopir,int uang_jalan);
+        void edit(int id, String foto,String tanngal_muat,String tanggal_bongkar,String berat_muat,String berat_bongkar);
         void hapus(int id);
     }
 
@@ -71,7 +71,7 @@ public class adapter_setoran extends RecyclerView.Adapter<adapter_setoran.Holder
         holder.txt_tujuan.setText(dm.getTujuan());
         holder.txt_total_bersih.setText(dm.getJumlah_bersih_new());
         holder.txt_total_kotor.setText(dm.getJumlah_kotor_new());
-        holder.txt_status.setText(dm.getStatus());
+        holder.txt_status.setText(dm.getStatus_pembayaran());
 
 
 
@@ -132,15 +132,17 @@ public class adapter_setoran extends RecyclerView.Adapter<adapter_setoran.Holder
         public HolderData(View v) {
             super(v);
             ButterKnife.bind(this, itemView);
-//            img_gambar.setOnClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View v) {
-//
-//
-//                    return false;
-//                }
-//            });
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onImageClickListener.edit(dm.getId(),
+                            dm.getFoto(),
+                            dm.getTglMuat(),
+                            dm.getTglBongkar(),
+                            dm.getBeratMuat(),
+                            dm.getBeratBongkar());
+                }
+            });
 
 
 

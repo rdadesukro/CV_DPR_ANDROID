@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_margin="@dimen/_8sdp"
+    android:padding="@dimen/_16sdp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,11 +12,10 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/btn_keluar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@color/grey_1000"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +31,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/opensansbold"
-            android:text="Uang Jalan"
+            android:text="Setoran"
             android:textColor="@color/grey_1000"
             android:textSize="@dimen/_16sdp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,13 +51,16 @@
         tools:ignore="MissingConstraints">
 
         <EditText
-            android:id="@+id/edit_sopir"
+            android:id="@+id/edit_tgl_muat"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:ems="10"
-            android:hint="Nama Sopir"
+            android:editable="false"
+            android:focusable="false"
+
+            android:hint="Tanngal Muat"
             android:inputType="number"
             android:textColor="#000000"
             android:textColorHint="@color/grey_1000"
@@ -77,14 +79,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/edit_pemilik_mobil"
+            android:id="@+id/edit_tgl_bongkar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginTop="@dimen/_8sdp"
             android:ems="10"
-            android:hint="Pemilik Mobil"
+            android:editable="false"
+            android:focusable="false"
+            android:hint="Tanggal Bongkar"
             android:inputType="number"
             android:textColor="#000000"
             android:textColorHint="@color/grey_1000"
@@ -105,14 +109,14 @@
         tools:ignore="MissingConstraints">
 
         <EditText
-            android:id="@+id/edit_uang_jalan"
+            android:id="@+id/edit_berat_muat"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginTop="@dimen/_8sdp"
             android:ems="10"
-            android:hint="Uang Jalan"
+            android:hint="Berat Muat"
             android:inputType="number"
             android:textColor="#000000"
             android:textColorHint="@color/grey_1000"
@@ -120,6 +124,107 @@
 
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ffd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/grey_1000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/edit_berat_bongkar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:ems="10"
+            android:hint="Berat Bongkar"
+            android:inputType="number"
+            android:textColor="#000000"
+            android:textColorHint="@color/grey_1000"
+            android:textSize="@dimen/_12sdp" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ccca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/grey_1000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/edit_transportir"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:ems="10"
+            android:editable="false"
+            android:focusable="false"
+            android:hint="Transportir"
+            android:inputType="number"
+            android:textColor="#000000"
+            android:textColorHint="@color/grey_1000"
+            android:textSize="@dimen/_12sdp" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ffd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/grey_1000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/edit_tujuan"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:ems="10"
+            android:editable="false"
+            android:focusable="false"
+            android:hint="Tujuan"
+            android:inputType="number"
+            android:textColor="#000000"
+            android:textColorHint="@color/grey_1000"
+            android:textSize="@dimen/_12sdp" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:fontFamily="@font/opensansbold"
+        android:textColor="@color/grey_1000"
+        android:textSize="@dimen/_12sdp"
+        android:layout_height="wrap_content"
+        android:text="Foto DO" />
+
+    <ImageView
+        android:id="@+id/img_foto_do"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/grey_1000"
+        android:scaleType="centerCrop"
+       />
 
     <Button
         android:id="@+id/button"

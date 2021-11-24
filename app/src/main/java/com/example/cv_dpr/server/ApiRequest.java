@@ -103,7 +103,10 @@ public interface ApiRequest {
 //
     @FormUrlEncoded
     @POST("auth/tampil_uang_jalan")
-    Call<Response_rekapan> get_uang_jalan(@Field("tanggal") String tanggal);
+    Call<Response_rekapan> get_uang_jalan(@Field("tanggal") String tanggal,
+                                          @Field("nama_sopir") String nama_sopir,
+                                          @Field("jenis") String jenis,
+                                          @Field("mobil_id") String mobil_id);
 
     @FormUrlEncoded
     @POST("auth/simpan_setoran")
@@ -121,6 +124,13 @@ public interface ApiRequest {
 
     @GET("auth/tampil_setoran")
     Call<Response_rekapan> get_setoran();
+
+    @FormUrlEncoded
+    @POST("auth/tampil_setoran")
+    Call<Response_rekapan> tampil_setoran(@Field("mobil_id") String mobil_id,
+                                          @Field("nama_sopir") String nama_sopir,
+                                          @Field("jenis") String jenis,
+                                          @Field("tanngal") String tanngal);
 
     @GET("auth/tampil_mobil")
     Call<Response_mobil> get_mobil();

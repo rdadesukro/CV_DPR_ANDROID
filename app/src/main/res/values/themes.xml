@@ -20,6 +20,7 @@
     <style name="FullscreenDialogTheme" parent="Theme.AppCompat.Light.DialogWhenLarge">
         <item name="android:textColor">@color/grey_1000</item>
         <item name="android:fontFamily">@font/opensansregular</item>
+        <item name="buttonBarButtonStyle">@color/grey_1000</item>
         <item name="android:windowAnimationStyle">@style/BottomDialogsAnimation</item>
     </style>
     <style name="BottomDialogsAnimation">

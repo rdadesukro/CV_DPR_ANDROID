@@ -33,11 +33,11 @@ public class rekapan {
         }
     }
 
-    public void get_uang_jalan(String tanggal) {
+    public void get_uang_jalan(String tanggal,String nama_sopir,String jenis,String mobil_id) {
         ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
         Log.i("isi_server", "isi_server: "+Retroserver_server_AUTH.getClient().baseUrl());
 
-        Call<Response_rekapan> call = api.get_uang_jalan(tanggal);
+        Call<Response_rekapan> call = api.get_uang_jalan(tanggal,nama_sopir,jenis,mobil_id);
         call.enqueue(new Callback<Response_rekapan>() {
             @Override
             public void onResponse(Call<Response_rekapan> call, Response<Response_rekapan> response) {
@@ -75,11 +75,11 @@ public class rekapan {
             }
         });
     }
-    public void get_setoran() {
+    public void get_setoran(String mobil_id,String nama_sopir,String jenis,String tanngal) {
         ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
         Log.i("isi_server", "isi_server: "+Retroserver_server_AUTH.getClient().baseUrl());
 
-        Call<Response_rekapan> call = api.get_setoran();
+        Call<Response_rekapan> call = api.tampil_setoran(mobil_id,nama_sopir,jenis,tanngal);
         call.enqueue(new Callback<Response_rekapan>() {
             @Override
             public void onResponse(Call<Response_rekapan> call, Response<Response_rekapan> response) {

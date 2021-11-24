@@ -240,6 +240,17 @@ public class DataSetoranItem{
 		this.status = status;
 	}
 
+
+	public String getStatus_pembayaran() {
+		return status_pembayaran;
+	}
+
+	public void setStatus_pembayaran(String status_pembayaran) {
+		this.status_pembayaran = status_pembayaran;
+	}
+
+	String status_pembayaran;
+
 	public String getStatus(){
 		return status;
 	}

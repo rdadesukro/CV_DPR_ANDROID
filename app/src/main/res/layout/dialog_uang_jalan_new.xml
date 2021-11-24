@@ -149,7 +149,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:backgroundTint="@color/grey_1000"
+                android:backgroundTint="@color/yellow_700"
                 android:text="Simpan"
                 android:textColor="@color/putih"
                 app:layout_constraintEnd_toEndOf="@+id/vvvv"

@@ -222,9 +222,14 @@
         android:id="@+id/img_foto_do"
         android:layout_width="100dp"
         android:layout_height="100dp"
+<<<<<<< HEAD
         android:background="@color/grey_1000"
         android:scaleType="centerCrop"
        />
+=======
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+>>>>>>> origin/master
 
     <Button
         android:id="@+id/button"

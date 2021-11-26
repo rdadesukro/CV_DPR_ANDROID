@@ -23,6 +23,8 @@ import com.jpegkit.Jpeg;
 
 import java.io.File;
 
+import es.dmoral.toasty.Toasty;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,14 +72,14 @@ public class fragment_add_edit_uang_jalan extends DialogFragment implements mobi
 
     @Override
     public void sukses(String pesan) {
-        Toast.makeText(getContext(), ""+pesan, Toast.LENGTH_SHORT).show();
+        Toasty.success(getActivity(), ""+pesan, Toast.LENGTH_SHORT, true).show();
 
     }
 
     @Override
     public void gagal(String pesan) {
      //  Toasty.success(getActivity(), ""+pesan, Toast.LENGTH_SHORT, true).show();
-        Toast.makeText(getContext(), ""+pesan, Toast.LENGTH_SHORT).show();
+        Toasty.error(getActivity(), ""+pesan, Toast.LENGTH_SHORT, true).show();
     }
 
 

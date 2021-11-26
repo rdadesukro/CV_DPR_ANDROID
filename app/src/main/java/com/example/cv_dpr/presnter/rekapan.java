@@ -1,5 +1,6 @@
 package com.example.cv_dpr.presnter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -34,6 +35,14 @@ public class rekapan {
     }
 
     public void get_uang_jalan(String tanggal,String nama_sopir,String jenis,String mobil_id) {
+
+        ProgressDialog pDialog = new ProgressDialog(ctx);
+        pDialog = new ProgressDialog(ctx);
+        pDialog.setMessage("Mencari Data...");
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
+        pDialog.show();
+        ProgressDialog finalPDialog = pDialog;
         ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
         Log.i("isi_server", "isi_server: "+Retroserver_server_AUTH.getClient().baseUrl());
 
@@ -45,6 +54,7 @@ public class rekapan {
                 try {
 
                     if (response.isSuccessful()) {
+                        finalPDialog.dismiss();
                         Response_rekapan data = response.body();
                         countryView.total_uang_jalan(data.getTotalUangJalan());
                         //Toast.makeText(ctx, ""+ response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -55,6 +65,7 @@ public class rekapan {
                         }
                     }
                 } catch (Exception e) {
+                    finalPDialog.dismiss();
                     Log.e("onResponse", "There is an error" + e);
                     e.printStackTrace();
                 }
@@ -64,6 +75,7 @@ public class rekapan {
             @Override
             public void onFailure(Call<Response_rekapan> call, Throwable t) {
                 t.printStackTrace();
+                finalPDialog.dismiss();
                 Log.i("cek_error", "onFailure: " + t);
                 if (t instanceof IOException) {
 

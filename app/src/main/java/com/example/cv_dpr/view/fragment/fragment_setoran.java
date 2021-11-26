@@ -209,16 +209,18 @@ public class fragment_setoran extends Fragment implements rekapan_view, adapter_
     }
 
     @Override
-    public void edit(int id, String foto,String tanngal_muat,String tanggal_bongkar,String berat_muat,String berat_bongkar) {
+    public void edit(int id, String foto,String tanngal_muat,String tanggal_bongkar,String berat_muat,String berat_bongkar,int transportir_id,int harga,String tujuan) {
         Bundle args = new Bundle();
-//        args.putString("id", String.valueOf(id));
-//        args.putString("id_sopir", String.valueOf(id_sopir));
-//        args.putString("uang_jalan", String.valueOf(uang_jalan));
-//        args.putString("id_pemilik_mobil", String.valueOf(id_pemilik_mobil));
-//        args.putString("nama_sopir",nama_sopir);
-//        args.putString("nama_pemilik_mobil",nama_pemilik_mobil);
+        args.putString("id", String.valueOf(id));
+        args.putString("foto", foto);
+        args.putString("tanngal_muat", tanngal_muat);
+        args.putString("tanggal_bongkar", tanggal_bongkar);
+        args.putString("berat_muat",berat_muat);
+        args.putString("berat_bongkar",berat_bongkar);
+        args.putString("transportir_id", String.valueOf(transportir_id));
+        args.putString("harga", String.valueOf(harga));
+        args.putString("tujuan", tujuan);
         args.putString("jenis","edit");
-
         fragment_add_edit_setoran newFragment = new fragment_add_edit_setoran();
         newFragment.setArguments(args);
         newFragment.show(getActivity().getSupportFragmentManager(), "TAG");

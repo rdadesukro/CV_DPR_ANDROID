@@ -91,7 +91,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="@dimen/_12sdp"
-                        android:text="Setoran"
+                        android:text="Menu"
                         android:textColor="@color/grey_1000"
                         android:textSize="16dp"
                         app:fontFamily="@font/opensansbold" />
@@ -106,7 +106,7 @@
                             android:layout_height="match_parent">
 
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/card_admin"
+                                android:id="@+id/card_bayar"
                                 android:layout_width="170dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginBottom="8dp"
@@ -259,15 +259,6 @@
                                         app:layout_constraintTop_toTopOf="parent"
                                         app:srcCompat="@drawable/ic_baseline_monetization_on_24" />
 
-                                    <TextView
-                                        android:id="@+id/txt_jm_events"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Jadwal"
-                                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                        android:textColor="@color/grey_5"
-                                        app:layout_constraintStart_toStartOf="@+id/textView13"
-                                        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
                                     <TextView
                                         android:id="@+id/textView13"
@@ -275,7 +266,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="8dp"
                                         android:layout_marginEnd="8dp"
-                                        android:text="CAMAT/LURAH"
+                                        android:text="Pengeluaran Harain"
                                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                                         android:textColor="@android:color/white"
                                         android:textSize="18dp"
@@ -327,28 +318,16 @@
                                     android:layout_height="match_parent">
 
                                     <TextView
-                                        android:id="@+id/dd"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:layout_marginBottom="8dp"
-                                        android:fontFamily="@font/opensansbold"
-                                        android:text="1.150"
-                                        android:textColor="@color/yellow_800"
-                                        android:textSize="@dimen/_10sdp"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent" />
-
-                                    <TextView
                                         android:id="@+id/dda"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="8dp"
+                                        android:layout_marginBottom="8dp"
                                         android:fontFamily="@font/opensansregular"
                                         android:text="Harga"
-                                        android:textColor="@color/grey_900"
+                                        android:textColor="@color/grey_1000"
                                         android:textSize="@dimen/_12sdp"
-                                        app:layout_constraintBottom_toTopOf="@+id/dd"
+                                        app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintStart_toStartOf="parent" />
 
                                     <ImageView
@@ -378,28 +357,16 @@
                                     android:layout_height="match_parent">
 
                                     <TextView
-                                        android:id="@+id/textView53"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:layout_marginBottom="8dp"
-                                        android:fontFamily="@font/opensansbold"
-                                        android:text="1.150"
-                                        android:textColor="@color/yellow_800"
-                                        android:textSize="@dimen/_10sdp"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent" />
-
-                                    <TextView
                                         android:id="@+id/textView52"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="8dp"
+                                        android:layout_marginBottom="8dp"
                                         android:fontFamily="@font/opensansregular"
                                         android:text="Transportir"
-                                        android:textColor="@color/grey_900"
+                                        android:textColor="@color/grey_1000"
                                         android:textSize="@dimen/_12sdp"
-                                        app:layout_constraintBottom_toTopOf="@+id/textView53"
+                                        app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintStart_toStartOf="parent" />
 
                                     <ImageView
@@ -434,28 +401,16 @@
                                     android:layout_height="match_parent">
 
                                     <TextView
-                                        android:id="@+id/textView53"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:layout_marginBottom="8dp"
-                                        android:fontFamily="@font/opensansbold"
-                                        android:text="1.150"
-                                        android:textColor="@color/yellow_800"
-                                        android:textSize="@dimen/_10sdp"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent" />
-
-                                    <TextView
                                         android:id="@+id/textView52"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="8dp"
+                                        android:layout_marginBottom="8dp"
                                         android:fontFamily="@font/opensansregular"
                                         android:text="Sopir"
-                                        android:textColor="@color/grey_900"
+                                        android:textColor="@color/grey_1000"
                                         android:textSize="@dimen/_12sdp"
-                                        app:layout_constraintBottom_toTopOf="@+id/textView53"
+                                        app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintStart_toStartOf="parent" />
 
                                     <ImageView
@@ -489,29 +444,16 @@
                                     android:layout_height="match_parent">
 
                                     <TextView
-                                        android:id="@+id/textView53"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:layout_marginBottom="8dp"
-                                        android:fontFamily="@font/opensansbold"
-                                        android:text="1.150"
-                                        android:textColor="@color/yellow_800"
-                                        android:textSize="@dimen/_10sdp"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        tools:ignore="RtlCompat" />
-
-                                    <TextView
                                         android:id="@+id/textView52"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="8dp"
+                                        android:layout_marginBottom="8dp"
                                         android:fontFamily="@font/opensansregular"
                                         android:text="Pemilik Mobil"
-                                        android:textColor="@color/grey_900"
+                                        android:textColor="@color/grey_1000"
                                         android:textSize="@dimen/_12sdp"
-                                        app:layout_constraintBottom_toTopOf="@+id/textView53"
+                                        app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintStart_toStartOf="parent" />
 
                                     <ImageView

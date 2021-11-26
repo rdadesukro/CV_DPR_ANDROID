@@ -26,6 +26,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+
 }
 
 dependencies {
@@ -128,6 +129,6 @@ dependencies {
     implementation 'es.voghdev.pdfviewpager:library:1.1.2'
 
     //glide
-    //implementation 'com.github.imjeevandeshmukh:GlideToast:1.0'
+    implementation 'com.github.GrenderG:Toasty:1.5.2'
 
 }

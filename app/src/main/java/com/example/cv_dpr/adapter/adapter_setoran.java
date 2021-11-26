@@ -41,7 +41,7 @@ public class adapter_setoran extends RecyclerView.Adapter<adapter_setoran.Holder
 
     }
     public interface OnImageClickListener {
-        void edit(int id, String foto,String tanngal_muat,String tanggal_bongkar,String berat_muat,String berat_bongkar);
+        void edit(int id, String foto,String tanngal_muat,String tanggal_bongkar,String berat_muat,String berat_bongkar,int transportir_id,int harga,String tujuan);
         void hapus(int id);
     }
 
@@ -140,7 +140,10 @@ public class adapter_setoran extends RecyclerView.Adapter<adapter_setoran.Holder
                             dm.getTglMuat(),
                             dm.getTglBongkar(),
                             dm.getBeratMuat(),
-                            dm.getBeratBongkar());
+                            dm.getBeratBongkar(),
+                            dm.getTransportirId(),
+                            dm.getHarga(),
+                            dm.getTujuan());
                 }
             });
 

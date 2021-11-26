@@ -40,12 +40,16 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
     com.example.cv_dpr.presnter.mobil mobil;
     int id_mobil, id_pemilik_mobil;
 
-    String jenis, nama_sopir, uang_jalan, nama_pemilik_mobil, id;
+    String tujuan,foto,jenis, nama_sopir, uang_jalan, nama_pemilik_mobil, id,berat_bongkar,berat_muat,tanngal_muat,tanggal_bongkar,harga,transportir_id;
     private EditText editTglMuat;
     private EditText editBeratMuat;
     private EditText editBeratBongkar;
     private ImageView imgFotoDo;
     private Button button;
+    private EditText editTransportir;
+    private EditText editTujuan;
+    private EditText editHarga;
+    private EditText editTglBongkar;
 
 
     public fragment_add_edit_setoran() {
@@ -62,6 +66,10 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
         editBeratMuat = V.findViewById(R.id.edit_berat_muat);
         editBeratBongkar = V.findViewById(R.id.edit_berat_bongkar);
         imgFotoDo = V.findViewById(R.id.img_foto_do);
+        editTransportir = V.findViewById(R.id.edit_transportir);
+        editTujuan = V.findViewById(R.id.edit_tujuan);
+        editHarga = V.findViewById(R.id.edit_harga);
+        editTglBongkar = V.findViewById(R.id.edit_tgl_bongkar);
     }
 
     @Override
@@ -109,15 +117,28 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
         if (jenis.equals("new")) {
 
         } else {
-//            nama_sopir = mArgs.getString("nama_sopir");
-//            id = mArgs.getString("id");
-//            uang_jalan = mArgs.getString("uang_jalan");
-//            nama_pemilik_mobil = mArgs.getString("nama_pemilik_mobil");
-//            id_mobil = Integer.parseInt(mArgs.getString("id_sopir"));
-//            id_pemilik_mobil = Integer.parseInt(mArgs.getString("id_pemilik_mobil"));
-//            editUangJalan.setText(uang_jalan);
-//            editPemilikMobil.setText(nama_pemilik_mobil);
-//            editSopir.setText(nama_sopir);
+
+
+            foto = mArgs.getString("foto");
+            id= mArgs.getString("id");
+            tanngal_muat = mArgs.getString("tanngal_muat");
+            tanggal_bongkar = mArgs.getString("tanggal_bongkar");
+            berat_muat =  mArgs.getString("berat_muat");
+            berat_bongkar =  mArgs.getString("berat_bongkar");
+            transportir_id =  mArgs.getString("transportir_id");
+            harga = mArgs.getString ("harga");
+            tujuan =  mArgs.getString("tujuan");
+
+
+            editTglMuat.setText(tanngal_muat);
+            editTglBongkar.setText(tanggal_bongkar);
+            editBeratMuat.setText(berat_muat);
+            editBeratBongkar.setText(berat_bongkar);
+            editTransportir.setText(transportir_id);
+            editHarga.setText(harga);
+            editTujuan.setText(tujuan);
+
+
         }
 
 
@@ -137,7 +158,7 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mobil.simpan_uang_jalan(id_mobil,id_pemilik_mobil,editUangJalan.getText().toString().trim(),jenis,id);
+                mobil.simpan_uang_jalan(id_mobil, id_pemilik_mobil, editUangJalan.getText().toString().trim(), jenis, id);
             }
         });
         return view;

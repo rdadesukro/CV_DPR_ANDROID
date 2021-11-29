@@ -87,6 +87,54 @@ public class rekapan {
             }
         });
     }
+
+//    public void get_rekapan(String id,String jenis,String waktu,String from,String to) {
+//
+//        ProgressDialog pDialog = new ProgressDialog(ctx);
+//        pDialog = new ProgressDialog(ctx);
+//        pDialog.setMessage("Mencari Data...");
+//        pDialog.setCancelable(false);
+//        pDialog.setCanceledOnTouchOutside(false);
+//        pDialog.show();
+//        ProgressDialog finalPDialog = pDialog;
+//        ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
+//        Log.i("isi_server", "isi_server: "+Retroserver_server_AUTH.getClient().baseUrl());
+//
+//        Call<Response> call = api.get_rekapan(id,jenis,waktu,from,to);
+//        call.enqueue(new Callback<Response>() {
+//            @Override
+//            public void onResponse(Call<Response> call, Response<Response> response) {
+//
+//                try {
+//
+//                    if (response.isSuccessful()) {
+//                        finalPDialog.dismiss();
+//                        Log.i("isi_respon", "onResponse: "+response.code());
+//
+//                    }
+//                } catch (Exception e) {
+//                    finalPDialog.dismiss();
+//                    Log.e("onResponse", "There is an error" + e);
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Response> call, Throwable t) {
+//                t.printStackTrace();
+//                finalPDialog.dismiss();
+//                Log.i("cek_error", "onFailure: " + t);
+//                if (t instanceof IOException) {
+//
+//                    Log.i("cek_error", "onFailure: " + t);
+//                } else {
+//
+//                    Log.i("cek_error", "onFailure: " + t);
+//                }
+//            }
+//        });
+//    }
     public void get_setoran(String mobil_id,String nama_sopir,String jenis,String tanngal) {
         ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
         Log.i("isi_server", "isi_server: "+Retroserver_server_AUTH.getClient().baseUrl());

@@ -4,11 +4,13 @@ package com.example.cv_dpr.server;
 
 
 
+import com.example.cv_dpr.model.pemilik_mobil.Response_pemilik_mobil;
 import com.example.cv_dpr.model.rekapan.Response_rekapan;
 import com.example.cv_dpr.model.mobil.Response_mobil;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -109,6 +111,16 @@ public interface ApiRequest {
                                           @Field("mobil_id") String mobil_id);
 
     @FormUrlEncoded
+    @POST("auth/rekapan")
+    Call<Response> get_rekapan(@Field("id") String tanggal,
+                                  @Field("jenis") String jenis,
+                                  @Field("waktu") String waktu,
+                                  @Field("from") String from,
+                                  @Field("to") String to);
+
+
+
+    @FormUrlEncoded
     @POST("auth/simpan_setoran")
     Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> simpan_uang_jalan(@Field("mobil_id") int mobil_id,
                                                                                 @Field("pemilik_mobil_id") int pemilik_mobil_id,
@@ -134,6 +146,9 @@ public interface ApiRequest {
 
     @GET("auth/tampil_mobil")
     Call<Response_mobil> get_mobil();
+
+    @GET("auth/pemilik_mobil")
+    Call<Response_pemilik_mobil> get_pemilik_mobil();
 //
 //
 //    @GET("user/jawaban/histori/admin")

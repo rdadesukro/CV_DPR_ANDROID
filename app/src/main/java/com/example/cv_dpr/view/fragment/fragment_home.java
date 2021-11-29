@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.cv_dpr.R;
 import com.example.cv_dpr.view.activity.menu_mobil;
+import com.example.cv_dpr.view.activity.menu_pembayaran;
 
 import butterknife.ButterKnife;
 
@@ -22,6 +23,7 @@ public class fragment_home extends Fragment {
     private CardView cardAbsen;
     private CardView cardTugas;
     private CardView cardMateri;
+    private CardView cardBayar;
 
     public fragment_home() {
         // Required empty public constructor
@@ -61,24 +63,25 @@ public class fragment_home extends Fragment {
     }
 
     private void initView(View v) {
-        cardPustaka =  v.findViewById(R.id.card_pustaka);
-        cardAbsen =  v.findViewById(R.id.card_absen);
-        cardTugas =  v.findViewById(R.id.card_tugas);
-        cardMateri =  v.findViewById(R.id.card_materi);
-
+        cardPustaka = v.findViewById(R.id.card_pustaka);
+        cardAbsen = v.findViewById(R.id.card_absen);
+        cardTugas = v.findViewById(R.id.card_tugas);
+        cardMateri = v.findViewById(R.id.card_materi);
+        cardBayar =  v.findViewById(R.id.card_bayar);
         cardMateri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent materi = new Intent(getActivity(), menu_mobil.class);
-               startActivity(materi);
+                startActivity(materi);
             }
         });
-//        cardTugas.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent materi = new Intent(getActivity(), menu_tugas.class);
-//                startActivity(materi);
-//            }
-//        });
+        cardBayar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent materi = new Intent(getActivity(), menu_pembayaran.class);
+                startActivity(materi);
+            }
+        });
+
     }
 }

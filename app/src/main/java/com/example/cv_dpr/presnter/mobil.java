@@ -1,6 +1,5 @@
 package com.example.cv_dpr.presnter;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
@@ -8,14 +7,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.cv_dpr.model.rekapan.DataSetoranItem;
-import com.example.cv_dpr.model.rekapan.Response_rekapan;
 import com.example.cv_dpr.model.mobil.DataMobilItem;
 import com.example.cv_dpr.model.mobil.Response_mobil;
+import com.example.cv_dpr.model.pemilik_mobil.DataPemilikMobilItem;
+import com.example.cv_dpr.model.pemilik_mobil.Response_pemilik_mobil;
 import com.example.cv_dpr.server.ApiRequest;
 import com.example.cv_dpr.server.Retroserver_server_AUTH;
 import com.example.cv_dpr.view.mobil_view;
-import com.example.cv_dpr.view.rekapan_view;
 import com.example.spinner_dialog.OnSpinerItemClick;
 import com.example.spinner_dialog.SpinnerDialog;
 
@@ -51,6 +49,16 @@ public class mobil {
     }
 
     public void get_mobil() {
+
+        ProgressDialog pDialog = new ProgressDialog(ctx);
+        pDialog = new ProgressDialog(ctx);
+        pDialog.setMessage("Mengambil Data...");
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
+        pDialog.show();
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(true);
+        ProgressDialog finalPDialog = pDialog;
         ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
         Call<Response_mobil> call = api.get_mobil();
         call.enqueue(new Callback<Response_mobil>() {
@@ -92,6 +100,7 @@ public class mobil {
                 if (spinnerDialog == null) {
                     Toast.makeText(ctx, "jaringan bermasalah...", Toast.LENGTH_SHORT);
                 } else {
+                    finalPDialog.dismiss();
                     spinnerDialog.showSpinerDialog("muncul");
                    // pd.dismiss();
                 }
@@ -102,6 +111,7 @@ public class mobil {
                 t.printStackTrace();
                 if (t instanceof IOException) {
                    // pd.dismiss();
+                    finalPDialog.dismiss();
                     //Toast.makeText(ErrorHandlingActivity.this, "this is an actual network failure :( inform the user and possibly retry", Toast.LENGTH_SHORT).show();
                     // logging probably not necessary
                     Toast.makeText(ctx, "Jaringan Anda Bermasalah", Toast.LENGTH_SHORT).show();
@@ -109,6 +119,7 @@ public class mobil {
                 }
                 else {
                    // pd.dismiss();
+                    finalPDialog.dismiss();
                     //  Toast.makeText(ErrorHandlingActivity.this, "conversion issue! big problems :(", Toast.LENGTH_SHORT).show();
                     // todo log to some central bug tracking service
                     Toast.makeText(ctx, "Jaringan Anda Bermasalah", Toast.LENGTH_SHORT).show();
@@ -117,6 +128,83 @@ public class mobil {
             }
         });
     }
+
+    public void get_pemilik_mobil() {
+
+        ProgressDialog pDialog = new ProgressDialog(ctx);
+        pDialog = new ProgressDialog(ctx);
+        pDialog.setMessage("Mengambil Data...");
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
+        pDialog.show();
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(true);
+        ProgressDialog finalPDialog = pDialog;
+        ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
+        Call<Response_pemilik_mobil> call = api.get_pemilik_mobil();
+        call.enqueue(new Callback<Response_pemilik_mobil>() {
+            @Override
+            public void onResponse(Call<Response_pemilik_mobil> call, Response<Response_pemilik_mobil> response) {
+                Response_pemilik_mobil data = response.body();
+                List<DataPemilikMobilItem> result = data.getDataPemilikMobil();
+
+                nama_pemilik_mobil_array.clear();
+                pemilik_mobil_id.clear();
+                mobil_id.clear();
+
+                for (int i = 0; i < result.size(); i++) {
+                    id_pemilik_mobil = result.get(i).getId();
+                    nama_pemilik_mobil = result.get(i).getNama();
+
+                    nama_pemilik_mobil_array.add(nama_pemilik_mobil);
+                    pemilik_mobil_id.add(id_pemilik_mobil);
+
+
+                }
+                spinnerDialog = new SpinnerDialog((AppCompatActivity) ctx, (ArrayList<String>) nama_pemilik_mobil_array, "Pilih Sopir Mobil");
+                spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+                    @Override
+                    public void onClick(String item, int position) {
+                        String nama_pemilik = nama_pemilik_mobil_array.get(position);
+                        int id_pemilik = pemilik_mobil_id.get(position);
+                        countryView.data_sopir(nama_pemilik,nama_pemilik,id_pemilik,id_mobil);
+
+
+                    }
+                });
+
+                if (spinnerDialog == null) {
+                    Toast.makeText(ctx, "jaringan bermasalah...", Toast.LENGTH_SHORT);
+                } else {
+                    finalPDialog.dismiss();
+                    spinnerDialog.showSpinerDialog("muncul");
+                    // pd.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response_pemilik_mobil> call, Throwable t) {
+                t.printStackTrace();
+                if (t instanceof IOException) {
+                    // pd.dismiss();
+                    finalPDialog.dismiss();
+                    //Toast.makeText(ErrorHandlingActivity.this, "this is an actual network failure :( inform the user and possibly retry", Toast.LENGTH_SHORT).show();
+                    // logging probably not necessary
+                    Toast.makeText(ctx, "Jaringan Anda Bermasalah", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    // pd.dismiss();
+                    finalPDialog.dismiss();
+                    //  Toast.makeText(ErrorHandlingActivity.this, "conversion issue! big problems :(", Toast.LENGTH_SHORT).show();
+                    // todo log to some central bug tracking service
+                    Toast.makeText(ctx, "Jaringan Anda Bermasalah", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+    }
+
 
     public void simpan_uang_jalan(int nama_sopir,int nama_pemilik_mobil,String uang_jalan,String jenis,String id) {
         ProgressDialog pDialog = new ProgressDialog(ctx);
@@ -170,7 +258,53 @@ public class mobil {
         });
 
     }
+    public void get_rekapan(String id,String jenis,String waktu,String from,String to) {
 
+        ProgressDialog pDialog = new ProgressDialog(ctx);
+        pDialog = new ProgressDialog(ctx);
+        pDialog.setMessage("Mencari Data...");
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
+        pDialog.show();
+        ProgressDialog finalPDialog = pDialog;
+        ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
+        Log.i("isi_server", "isi_server: "+Retroserver_server_AUTH.getClient().baseUrl());
+
+        Call<Response> call = api.get_rekapan(id,jenis,waktu,from,to);
+        call.enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, Response<Response> response) {
+
+                try {
+
+                    if (response.isSuccessful()) {
+                        finalPDialog.dismiss();
+                        Log.i("isi_respon", "onResponse: "+response.code());
+
+                    }
+                } catch (Exception e) {
+                    finalPDialog.dismiss();
+                    Log.e("onResponse", "There is an error" + e);
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+                t.printStackTrace();
+                finalPDialog.dismiss();
+                Log.i("cek_error", "onFailure: " + t);
+                if (t instanceof IOException) {
+
+                    Log.i("cek_error", "onFailure: " + t);
+                } else {
+
+                    Log.i("cek_error", "onFailure: " + t);
+                }
+            }
+        });
+    }
     public void simpan_setoran(int nama_sopir,int nama_pemilik_mobil,String uang_jalan,String jenis,String id) {
         ProgressDialog pDialog = new ProgressDialog(ctx);
         pDialog = new ProgressDialog(ctx);

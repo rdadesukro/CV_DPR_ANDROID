@@ -32,7 +32,7 @@ import es.voghdev.pdfviewpager.library.util.FileUtil;
 public class menu_mobil extends AppCompatActivity implements DownloadFile.Listener{
 
     private PDFView idPDFView;
-    String pdfurl = "http://10.1.4.63/cv_dpr/public/api/pembayaran";
+    String pdfurl = "http://127.0.0.1:8000/api/auth/rekapan";
     private ProgressBar progressBar;
     private LinearLayout pdfLayout;
 

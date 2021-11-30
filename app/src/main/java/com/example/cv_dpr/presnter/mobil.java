@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -267,23 +268,29 @@ public class mobil {
         pDialog.setCanceledOnTouchOutside(false);
         pDialog.show();
         ProgressDialog finalPDialog = pDialog;
+        finalPDialog.setCanceledOnTouchOutside(true);
         ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
         Log.i("isi_server", "isi_server: "+Retroserver_server_AUTH.getClient().baseUrl());
 
-        Call<Response> call = api.get_rekapan(id,jenis,waktu,from,to);
-        call.enqueue(new Callback<Response>() {
+        Call<ResponseBody> call = api.get_rekapan(id,jenis,waktu,from,to);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<Response> call, Response<Response> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 try {
 
                     if (response.isSuccessful()) {
                         finalPDialog.dismiss();
                         Log.i("isi_respon", "onResponse: "+response.code());
+                        Toast.makeText(ctx, ""+response.code(), Toast.LENGTH_SHORT).show();
+
+                        countryView.sukses(String.valueOf(response.code()));
+//
 
                     }
                 } catch (Exception e) {
                     finalPDialog.dismiss();
+                    Toast.makeText(ctx, ""+e, Toast.LENGTH_SHORT).show();
                     Log.e("onResponse", "There is an error" + e);
                     e.printStackTrace();
                 }
@@ -291,7 +298,7 @@ public class mobil {
             }
 
             @Override
-            public void onFailure(Call<Response> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.printStackTrace();
                 finalPDialog.dismiss();
                 Log.i("cek_error", "onFailure: " + t);

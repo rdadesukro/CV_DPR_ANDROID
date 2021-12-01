@@ -1,7 +1,12 @@
 package com.example.cv_dpr.presnter;
 
+import static android.content.ContentValues.TAG;
+
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -17,6 +22,8 @@ import com.example.cv_dpr.view.mobil_view;
 import com.example.spinner_dialog.OnSpinerItemClick;
 import com.example.spinner_dialog.SpinnerDialog;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -283,8 +290,31 @@ public class mobil {
                         finalPDialog.dismiss();
                         Log.i("isi_respon", "onResponse: "+response.code());
                         Toast.makeText(ctx, ""+response.code(), Toast.LENGTH_SHORT).show();
-
+                        final String filename = System.currentTimeMillis() /1000L+".pdf";
                         countryView.sukses(String.valueOf(response.code()));
+                        new AsyncTask<Void, Void, Void>() {
+                            @SuppressLint("StaticFieldLeak")
+                            @Override
+                            protected Void doInBackground(Void... voids) {
+                                try{
+                                    File path = Environment.getExternalStorageDirectory();
+                                    File file = new File(path+File.separator+"stock-out"+File.separator,filename);
+                                    file.getParentFile().mkdirs();
+                                    FileOutputStream fileOutputStream = new FileOutputStream(file);
+                                   // Log.i("isi_pdf", "doInBackground: "+fileOutputStream);
+                                    //IOUtils.write(response.body().bytes(), fileOutputStream);
+                                }catch (IOException e){
+                                    Log.e(TAG, "Erorr While Writing Files");
+                                    Log.e(TAG, e.toString());
+                                }
+                                return null;
+                            }
+                            @Override
+                            protected void onPostExecute(Void aVoid) {
+                                super.onPostExecute(aVoid);
+                                //  Toast.makeText(getActivity(), "Download Success", Toast.LENGTH_SHORT).show();
+                            }
+                        }.execute();
 //
 
                     }

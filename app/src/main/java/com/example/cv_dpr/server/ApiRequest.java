@@ -108,7 +108,7 @@ public interface ApiRequest {
 
     @GET("/rekapan")
     @Streaming
-    Call<ResponseBody> get_rekapan(@Path("id") String tanggal,
+    Call<ResponseBody> get_rekapan(@Path("id") String id,
                                    @Path("jenis") String jenis,
                                    @Path("waktu") String waktu,
                                    @Path("from") String from,

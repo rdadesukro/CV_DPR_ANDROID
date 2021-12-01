@@ -2,7 +2,6 @@ package com.example.cv_dpr.view.activity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -235,6 +234,10 @@ public class menu_pembayaran extends AppCompatActivity implements mobil_view {
         String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         editTanggalAkhir.setText(sdf.format(myCalendar.getTime()));
+    }
+    public void get_laporan_selesai() {
+
+
     }
 
 }

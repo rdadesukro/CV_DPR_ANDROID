@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cv_dpr.R;
-import com.example.cv_dpr.model.pembyaran.DataKasbonItem;
+import com.example.cv_dpr.model.pemilik_mobil.DataPemilikMobilItem;
 
 import java.util.List;
 
@@ -22,17 +22,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class adapter_kasbon extends RecyclerView.Adapter<adapter_kasbon.HolderData> {
+public class adapter_pemilik_mobil extends RecyclerView.Adapter<adapter_pemilik_mobil.HolderData> {
     private static CountDownTimer countDownTimer;
     String kriim;
     String lat_new,lng_new;
     String lat,lng;
     String jenis;
     private int animation_type = 0;
-    private List<DataKasbonItem> mList ;
+    private List<DataPemilikMobilItem> mList ;
     private Context ctx;
     private OnImageClickListener onImageClickListener;
-    public adapter_kasbon(Context ctx, List<DataKasbonItem> mList , int animation_type, OnImageClickListener onImageClickListener) {
+    public adapter_pemilik_mobil(Context ctx, List<DataPemilikMobilItem> mList , int animation_type, OnImageClickListener onImageClickListener) {
         this.jenis = jenis;
         this.animation_type = animation_type;
         this.mList = mList;
@@ -41,7 +41,7 @@ public class adapter_kasbon extends RecyclerView.Adapter<adapter_kasbon.HolderDa
 
     }
     public interface OnImageClickListener {
-        void edit(int id, int id_sopir,int uang_jalan,int id_pemilik_mobil,String nama_sopir,String nama_pemilik_mobil);
+        void edit(int id, String nama,String jumlah_unit);
         void hapus(int id);
     }
 
@@ -52,7 +52,7 @@ public class adapter_kasbon extends RecyclerView.Adapter<adapter_kasbon.HolderDa
     public HolderData onCreateViewHolder(ViewGroup parent, int viewType) {
         View layout;
         HolderData holder;
-            layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.model_uang_jalan_new,parent, false);
+            layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.model_pemilik_mobil,parent, false);
             holder = new HolderData(layout);
 
             return holder;
@@ -63,11 +63,11 @@ public class adapter_kasbon extends RecyclerView.Adapter<adapter_kasbon.HolderDa
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(final HolderData holder, @SuppressLint("RecyclerView") int position) {
-        final DataKasbonItem dm = mList.get(position);
+        final DataPemilikMobilItem dm = mList.get(position);
 
         holder.txt_nama.setText(dm.getNama());
-        holder.txt_uang_jalan.setText(""+dm.getJumlah_uang_new());
-        holder.txt_tgl.setText(dm.getTanggal());
+        holder.txt_unit.setText(dm.getJumlahUnit()+" Unit");
+        holder.txt_tgl.setText(dm.getCreatedAt());
 
 
 
@@ -104,15 +104,15 @@ public class adapter_kasbon extends RecyclerView.Adapter<adapter_kasbon.HolderDa
         TextView txt_nama;
 
 
-        @BindView(R.id.txt_tgl)
+        @BindView(R.id.txt_tanggal)
         TextView txt_tgl;
 
-        @BindView(R.id.txt_uang_jalan)
-        TextView txt_uang_jalan;
+        @BindView(R.id.txt_unit)
+        TextView txt_unit;
 
 
 
-        DataKasbonItem dm;
+        DataPemilikMobilItem dm;
         int pos;
 
 
@@ -123,7 +123,7 @@ public class adapter_kasbon extends RecyclerView.Adapter<adapter_kasbon.HolderDa
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   // onImageClickListener.edit(dm.getId(),dm.getMobilId(),dm.getUangJalan(),dm.getPemilikMobilId(),dm.getMobil().getNamaSopir(),dm.getMobil().getPemilikMobil().get(0).getNama());
+                  //  onImageClickListener.edit(dm.getId(),dm.getMobilId(),dm.getUangJalan(),dm.getPemilikMobilId(),dm.getMobil().getNamaSopir(),dm.getMobil().getPemilikMobil().get(0).getNama());
                 }
             });
 

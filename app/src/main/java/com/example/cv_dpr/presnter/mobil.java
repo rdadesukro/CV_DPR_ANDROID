@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.cv_dpr.model.mobil.DataMobilItem;
 import com.example.cv_dpr.model.mobil.Response_mobil;
 import com.example.cv_dpr.model.pembyaran.DataKasbonItem;
+import com.example.cv_dpr.model.pembyaran.DataPemilikMobilItem_mobil;
 import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
+import com.example.cv_dpr.model.pembyaran.DataSopirItem_data;
 import com.example.cv_dpr.model.pembyaran.Response_pembayaran;
 import com.example.cv_dpr.model.pemilik_mobil.DataPemilikMobilItem;
 import com.example.cv_dpr.model.pemilik_mobil.Response_pemilik_mobil;
@@ -283,6 +285,14 @@ public class mobil {
 
                     if (response.isSuccessful()) {
                         Response_pembayaran data = response.body();
+                        String totol_kotor= data.getTotalKotor();
+                        String total_uang_jalan=data.getTotalUangJalan();
+                        String total_bersih = data.getTotalBersih();
+                        String total_kasbon = data.getTotalKasbon();
+                        String total_final = data.getTotalFinalBersih();
+
+
+
                         //Toast.makeText(ctx, ""+ response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         Log.i("isi_data", "onResponse: "+data);
                         if (data != null && data.getDataSetoran() != null) {
@@ -293,6 +303,19 @@ public class mobil {
                             List<DataSetoranItem_pembayaran> result = data.getDataSetoran();
                             countryView.pembayaran(result);
                         }
+                        if (data != null && data.getDataSetoran() != null) {
+                            List<DataSopirItem_data> result = data.getDataSopir();
+                            countryView.data_sopir(result);
+                        }
+                        if (data != null && data.getDataSetoran() != null) {
+                            List<DataPemilikMobilItem_mobil> result = data.getDataPemilikMobil();
+                            countryView.data_pemilik_mobil(result);
+                        }
+                        countryView.data_pembayaran(totol_kotor,
+                                total_uang_jalan,
+                                total_bersih,
+                                total_kasbon,
+                                total_final);
                       int zize = data.getDataSetoran().size();
                       if (zize == 0){
                           finalPDialog.dismiss();

@@ -1,7 +1,6 @@
 package com.example.cv_dpr.view;
 
 
-import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
 import com.example.cv_dpr.model.rekapan.DataSetoranItem;
 
 import java.util.List;

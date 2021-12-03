@@ -18,7 +18,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.cv_dpr.R;
 import com.example.cv_dpr.model.pembyaran.DataKasbonItem;
+import com.example.cv_dpr.model.pembyaran.DataPemilikMobilItem_mobil;
 import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
+import com.example.cv_dpr.model.pembyaran.DataSopirItem_data;
 import com.example.cv_dpr.presnter.mobil;
 import com.example.cv_dpr.view.mobil_view;
 import com.jpegkit.Jpeg;
@@ -104,6 +106,21 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
 
     @Override
     public void pembayaran(List<DataSetoranItem_pembayaran> pembayaran) {
+
+    }
+
+    @Override
+    public String data_pembayaran(String totol_setoran, String total_uang_jalan, String total_bersih, String total_kasbon, String total_finis) {
+        return null;
+    }
+
+    @Override
+    public void data_sopir(List<DataSopirItem_data> sopir) {
+
+    }
+
+    @Override
+    public void data_pemilik_mobil(List<DataPemilikMobilItem_mobil> pemilik_mobil) {
 
     }
 

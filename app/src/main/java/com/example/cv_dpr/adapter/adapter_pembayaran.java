@@ -135,15 +135,15 @@ public class adapter_pembayaran extends RecyclerView.Adapter<adapter_pembayaran.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onImageClickListener.edit(dm.getId(),
-                            dm.getFoto(),
-                            dm.getTglMuat(),
-                            dm.getTglBongkar(),
-                            dm.getBeratMuat(),
-                            dm.getBeratBongkar(),
-                            dm.getTransportirId(),
-                            dm.getHarga(),
-                            dm.getTujuan());
+//                    onImageClickListener.edit(dm.getId(),
+//                            dm.getf(),
+//                            dm.getTglMuat(),
+//                            dm.getTglBongkar(),
+//                            dm.getBeratMuat(),
+//                            dm.getBeratBongkar(),
+//                            dm.getTransportirId(),
+//                            dm.getHarga(),
+//                            dm.getTujuan());
                 }
             });
 

@@ -10,8 +10,8 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.cv_dpr.R;
-import com.example.cv_dpr.view.activity.menu_mobil;
 import com.example.cv_dpr.view.activity.menu_pembayaran;
+import com.example.cv_dpr.view.activity.menu_pemilik_mobil;
 
 import butterknife.ButterKnife;
 
@@ -71,7 +71,7 @@ public class fragment_home extends Fragment {
         cardMateri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent materi = new Intent(getActivity(), menu_mobil.class);
+                Intent materi = new Intent(getActivity(), menu_pemilik_mobil.class);
                 startActivity(materi);
             }
         });

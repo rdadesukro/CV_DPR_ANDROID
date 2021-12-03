@@ -2,7 +2,7 @@ package com.example.cv_dpr.model.pembyaran;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PemilikMobilItem{
+public class DataPemilikMobilItem_mobil {
 
 	@SerializedName("nama")
 	private String nama;
@@ -62,7 +62,7 @@ public class PemilikMobilItem{
 	@Override
  	public String toString(){
 		return 
-			"PemilikMobilItem{" + 
+			"DataPemilikMobilItem{" + 
 			"nama = '" + nama + '\'' + 
 			",updated_at = '" + updatedAt + '\'' + 
 			",jumlah_unit = '" + jumlahUnit + '\'' + 

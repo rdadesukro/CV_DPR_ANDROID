@@ -62,6 +62,7 @@
                             android:layout_width="wrap_content"
 
                             android:layout_height="wrap_content"
+                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +107,37 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txt_data2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="Tidak Ada Data"
+                            android:textColor="#000000"
+                            android:textSize="16dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/img_data_kasbon"
+                            app:layout_constraintStart_toStartOf="@+id/img_data_kasbon"
+                            app:layout_constraintTop_toBottomOf="@+id/img_data_kasbon"
+                            app:layout_constraintVertical_bias="0.0"
+                            tools:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/img_data_kasbon"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/empty"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView3"
+                            tools:visibility="visible" />
 
                         <ImageView
                             android:id="@+id/btn_kasbon"
@@ -129,15 +160,12 @@
 
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
-                            android:layout_marginBottom="16dp"
                             android:fontFamily="@font/opensansbold"
                             android:text="Hasil Kasbon"
                             android:textColor="#232121"
                             android:textSize="@dimen/_12sdp"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/con_kasbon"
@@ -172,8 +200,10 @@
                                 android:scrollbarAlwaysDrawHorizontalTrack="false"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.0" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -188,6 +218,36 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/txt_data_do"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="Tidak Ada Data"
+                            android:textColor="#000000"
+                            android:textSize="16dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/img_data_do"
+                            app:layout_constraintStart_toStartOf="@+id/img_data_do"
+                            app:layout_constraintTop_toBottomOf="@+id/img_data_do"
+                            app:layout_constraintVertical_bias="0.0"
+                            tools:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/img_data_do"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/empty"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView3"
+                            tools:visibility="visible" />
 
                         <ImageView
                             android:id="@+id/btn_setoran"
@@ -210,15 +270,12 @@
 
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
-                            android:layout_marginBottom="16dp"
                             android:fontFamily="@font/opensansbold"
                             android:text="Hasil Do"
                             android:textColor="#232121"
                             android:textSize="@dimen/_12sdp"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/con_kasbon"
@@ -227,8 +284,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView3"
-                            tools:visibility="visible">
+                            app:layout_constraintTop_toBottomOf="@+id/textView3">
 
                             <ProgressBar
                                 android:id="@+id/prog_setoran"

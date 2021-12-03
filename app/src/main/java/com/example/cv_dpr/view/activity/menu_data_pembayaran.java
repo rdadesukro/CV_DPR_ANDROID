@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -21,12 +22,15 @@ import com.example.cv_dpr.R;
 import com.example.cv_dpr.adapter.adapter_kasbon;
 import com.example.cv_dpr.adapter.adapter_pembayaran;
 import com.example.cv_dpr.model.pembyaran.DataKasbonItem;
+import com.example.cv_dpr.model.pembyaran.DataPemilikMobilItem_mobil;
 import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
+import com.example.cv_dpr.model.pembyaran.DataSopirItem_data;
 import com.example.cv_dpr.model.rekapan.DataSetoranItem;
 import com.example.cv_dpr.presnter.mobil;
 import com.example.cv_dpr.view.mobil_view;
 import com.example.cv_dpr.view.rekapan_view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class menu_data_pembayaran extends AppCompatActivity implements mobil_view, rekapan_view {
@@ -54,6 +58,12 @@ public class menu_data_pembayaran extends AppCompatActivity implements mobil_vie
     private com.example.cv_dpr.adapter.adapter_kasbon adapter_kasbon;
     private com.example.cv_dpr.adapter.adapter_pembayaran adapter_pembayaran;
     private WebView webData;
+    String nama_pemilik_mobil;
+    public static List<String> nama_Sopir = new ArrayList<String>();
+    private TextView txtData2;
+    private ImageView imgDataKasbon;
+    private TextView txtDataDo;
+    private ImageView imgDataDo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +104,10 @@ public class menu_data_pembayaran extends AppCompatActivity implements mobil_vie
         progSetoran = findViewById(R.id.prog_setoran);
         rvSetoran = findViewById(R.id.rv_setoran);
         webData = findViewById(R.id.web_data);
+        txtData2 = findViewById(R.id.txt_data2);
+        imgDataKasbon = findViewById(R.id.img_data_kasbon);
+        txtDataDo = findViewById(R.id.txt_data_do);
+        imgDataDo = findViewById(R.id.img_data_do);
     }
 
     @Override
@@ -125,10 +139,13 @@ public class menu_data_pembayaran extends AppCompatActivity implements mobil_vie
 
             swifeRefresh.setRefreshing(false);
             if (kasbon.size() == 0) {
-
-                progKasbon.setVisibility(View.VISIBLE);
+                txtData2.setVisibility(View.VISIBLE);
+                imgDataKasbon.setVisibility(View.VISIBLE);
+                progKasbon.setVisibility(View.GONE);
 //
             } else {
+                txtData2.setVisibility(View.GONE);
+                imgDataKasbon.setVisibility(View.GONE);
                 progKasbon.setVisibility(View.GONE);
 //
 
@@ -152,10 +169,14 @@ public class menu_data_pembayaran extends AppCompatActivity implements mobil_vie
 
             swifeRefresh.setRefreshing(false);
             if (pembayaran.size() == 0) {
+                txtDataDo.setVisibility(View.VISIBLE);
+                imgDataDo.setVisibility(View.VISIBLE);
 
-                progSetoran.setVisibility(View.VISIBLE);
+                progSetoran.setVisibility(View.GONE);
 //
             } else {
+                txtDataDo.setVisibility(View.GONE);
+                imgDataDo.setVisibility(View.GONE);
                 progSetoran.setVisibility(View.GONE);
 //
 
@@ -163,6 +184,75 @@ public class menu_data_pembayaran extends AppCompatActivity implements mobil_vie
         } catch (Exception e) {
 
         }
+    }
+
+    @Override
+    public String data_pembayaran(String totol_setoran, String total_uang_jalan, String total_bersih, String total_kasbon, String total_finis) {
+
+        String myTable = "<table border=0>" +
+                "<tr>" +
+                "<td>Nama Pemilik Mobil</td>" +
+                "<td>:</td>" +
+                "<td>" + nama_pemilik_mobil + "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<td>Nama Sopir</td>" +
+                "<td>:</td>" +
+                "<td>" + nama_Sopir + "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<td>Total Setoran DO</td>" +
+                "<td>:</td>" +
+                "<td>" + totol_setoran + "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<td>Total Uang Jalan</td>" +
+                "<td>:</td>" +
+                "<td>" + total_uang_jalan + "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<td>Total Bersih</td>" +
+                "<td>:</td>" +
+                "<td>" + total_bersih + "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<td>Total Kasbon</td>" +
+                "<td>:</td>" +
+                "<td>" + total_kasbon + "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<td>Total Final</td>" +
+                "<td>:</td>" +
+                "<td>" + total_finis + "</td>" +
+                "</tr>" +
+                "</table>";
+
+        webData.requestFocus();
+        webData.getSettings().setLightTouchEnabled(true);
+        webData.getSettings().setJavaScriptEnabled(true);
+        webData.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+        webData.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        // webData.loadDataWithBaseURL("","<style>img{display: inline;height: auto;max-width: 100%;}</style>"+ text, "text/html", "UTF-8", "");
+        webData.loadDataWithBaseURL(null, myTable, "text/html", "utf-8", null);
+        return null;
+    }
+
+    @Override
+    public void data_sopir(List<DataSopirItem_data> sopir) {
+        nama_Sopir.clear();
+
+        for (int i = 0; i < sopir.size(); i++) {
+            nama_Sopir.add(sopir.get(i).getNamaSopir());
+            //   nama_Sopir.set(i,sopir.get(i).getNamaSopir());
+        }
+        Log.i("data_nama", "data_sopir: " + nama_Sopir);
+
+
+    }
+
+    @Override
+    public void data_pemilik_mobil(List<DataPemilikMobilItem_mobil> pemilik_mobil) {
+        nama_pemilik_mobil = pemilik_mobil.get(0).getNama();
     }
 
     @Override

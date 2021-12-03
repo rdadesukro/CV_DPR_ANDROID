@@ -1,12 +1,16 @@
 package com.example.cv_dpr.model.pembyaran;
 
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class Response_pembayaran {
 
 	@SerializedName("total_kasbon")
 	private String totalKasbon;
+
+	@SerializedName("data_sopir")
+	private List<DataSopirItem_data> dataSopir;
 
 	@SerializedName("total_uang_jalan")
 	private String totalUangJalan;
@@ -35,8 +39,8 @@ public class Response_pembayaran {
 	@SerializedName("message")
 	private String message;
 
-	@SerializedName("nama_Sopir")
-	private String namaSopir;
+	@SerializedName("data_pemilik_mobil")
+	private List<DataPemilikMobilItem_mobil> dataPemilikMobil;
 
 	public void setTotalKasbon(String totalKasbon){
 		this.totalKasbon = totalKasbon;
@@ -44,6 +48,14 @@ public class Response_pembayaran {
 
 	public String getTotalKasbon(){
 		return totalKasbon;
+	}
+
+	public void setDataSopir(List<DataSopirItem_data> dataSopir){
+		this.dataSopir = dataSopir;
+	}
+
+	public List<DataSopirItem_data> getDataSopir(){
+		return dataSopir;
 	}
 
 	public void setTotalUangJalan(String totalUangJalan){
@@ -118,12 +130,12 @@ public class Response_pembayaran {
 		return message;
 	}
 
-	public void setNamaSopir(String namaSopir){
-		this.namaSopir = namaSopir;
+	public void setDataPemilikMobil(List<DataPemilikMobilItem_mobil> dataPemilikMobil){
+		this.dataPemilikMobil = dataPemilikMobil;
 	}
 
-	public String getNamaSopir(){
-		return namaSopir;
+	public List<DataPemilikMobilItem_mobil> getDataPemilikMobil(){
+		return dataPemilikMobil;
 	}
 
 	@Override
@@ -131,6 +143,7 @@ public class Response_pembayaran {
 		return 
 			"Response{" + 
 			"total_kasbon = '" + totalKasbon + '\'' + 
+			",data_sopir = '" + dataSopir + '\'' + 
 			",total_uang_jalan = '" + totalUangJalan + '\'' + 
 			",total_bersih = '" + totalBersih + '\'' + 
 			",data_setoran = '" + dataSetoran + '\'' + 
@@ -140,7 +153,7 @@ public class Response_pembayaran {
 			",total_final_bersih = '" + totalFinalBersih + '\'' + 
 			",total_kotor = '" + totalKotor + '\'' + 
 			",message = '" + message + '\'' + 
-			",nama_Sopir = '" + namaSopir + '\'' + 
+			",data_pemilik_mobil = '" + dataPemilikMobil + '\'' + 
 			"}";
 		}
 }

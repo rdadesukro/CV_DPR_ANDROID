@@ -22,6 +22,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/absen"
+                tools:ignore="MissingConstraints" />
+
             <TextView
                 android:id="@+id/txt_status"
                 android:layout_width="wrap_content"
@@ -34,30 +46,6 @@
                 app:layout_constraintBottom_toBottomOf="@+id/txt_total_bersih"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txt_total_bersih" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="8dp"
-                app:cardCornerRadius="@dimen/_8sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/absen"
-                        tools:ignore="MissingConstraints" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/txt_total_bersih"
@@ -102,13 +90,13 @@
                 android:id="@+id/txt_nama"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/opensansbold"
                 android:text="Yadi"
                 android:textColor="@color/grey_1000"
                 android:textSize="@dimen/_12sdp"
-                app:layout_constraintStart_toEndOf="@+id/cardView"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView

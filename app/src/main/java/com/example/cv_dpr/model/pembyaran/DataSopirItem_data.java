@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Mobil{
+public class DataSopirItem_data {
 
 	@SerializedName("pemilik_mobil_id")
 	private int pemilikMobilId;
@@ -97,7 +97,7 @@ public class Mobil{
 	@Override
  	public String toString(){
 		return 
-			"Mobil{" + 
+			"DataSopirItem{" + 
 			"pemilik_mobil_id = '" + pemilikMobilId + '\'' + 
 			",updated_at = '" + updatedAt + '\'' + 
 			",jenis = '" + jenis + '\'' + 

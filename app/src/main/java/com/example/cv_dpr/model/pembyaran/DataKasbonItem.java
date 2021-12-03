@@ -13,6 +13,18 @@ public class DataKasbonItem{
 	@SerializedName("pemilik_mobil_id")
 	private int pemilikMobilId;
 
+	public String getJumlah_uang_new() {
+		return jumlah_uang_new;
+	}
+
+	public void setJumlah_uang_new(String jumlah_uang_new) {
+		this.jumlah_uang_new = jumlah_uang_new;
+	}
+
+	@SerializedName("jumlah_uang_new")
+	private String jumlah_uang_new;
+
+
 	@SerializedName("updated_at")
 	private String updatedAt;
 

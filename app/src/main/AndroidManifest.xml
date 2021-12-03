@@ -31,6 +31,9 @@
         android:theme="@style/Theme.CV_DPR"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.activity.menu_data_pembayaran"
+            android:exported="false" />
+        <activity
             android:name=".view.activity.menu_pembayaran"
             android:exported="false" />
         <activity
@@ -50,8 +53,8 @@
             android:exported="false" />
         <activity
             android:name=".view.activity.menu_utama"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

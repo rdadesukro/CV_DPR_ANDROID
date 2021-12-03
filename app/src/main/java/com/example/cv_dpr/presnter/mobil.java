@@ -1,12 +1,7 @@
 package com.example.cv_dpr.presnter;
 
-import static android.content.ContentValues.TAG;
-
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cv_dpr.model.mobil.DataMobilItem;
 import com.example.cv_dpr.model.mobil.Response_mobil;
+import com.example.cv_dpr.model.pembyaran.DataKasbonItem;
+import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
+import com.example.cv_dpr.model.pembyaran.Response_pembayaran;
 import com.example.cv_dpr.model.pemilik_mobil.DataPemilikMobilItem;
 import com.example.cv_dpr.model.pemilik_mobil.Response_pemilik_mobil;
 import com.example.cv_dpr.server.ApiRequest;
@@ -22,13 +20,10 @@ import com.example.cv_dpr.view.mobil_view;
 import com.example.spinner_dialog.OnSpinerItemClick;
 import com.example.spinner_dialog.SpinnerDialog;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -279,43 +274,34 @@ public class mobil {
         ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
         Log.i("isi_server", "isi_server: "+Retroserver_server_AUTH.getClient().baseUrl());
 
-        Call<ResponseBody> call = api.get_rekapan(id,jenis,waktu,from,to);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<Response_pembayaran> call = api.get_rekapan(id,jenis,waktu,from,to);
+        call.enqueue(new Callback<Response_pembayaran>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<Response_pembayaran> call, Response<Response_pembayaran> response) {
 
                 try {
 
                     if (response.isSuccessful()) {
-                        finalPDialog.dismiss();
-                        Log.i("isi_respon", "onResponse: "+response.code());
-                        Toast.makeText(ctx, ""+response.code(), Toast.LENGTH_SHORT).show();
-                        final String filename = System.currentTimeMillis() /1000L+".pdf";
-                        countryView.sukses(String.valueOf(response.code()));
-                        new AsyncTask<Void, Void, Void>() {
-                            @SuppressLint("StaticFieldLeak")
-                            @Override
-                            protected Void doInBackground(Void... voids) {
-                                try{
-                                    File path = Environment.getExternalStorageDirectory();
-                                    File file = new File(path+File.separator+"stock-out"+File.separator,filename);
-                                    file.getParentFile().mkdirs();
-                                    FileOutputStream fileOutputStream = new FileOutputStream(file);
-                                   // Log.i("isi_pdf", "doInBackground: "+fileOutputStream);
-                                    //IOUtils.write(response.body().bytes(), fileOutputStream);
-                                }catch (IOException e){
-                                    Log.e(TAG, "Erorr While Writing Files");
-                                    Log.e(TAG, e.toString());
-                                }
-                                return null;
-                            }
-                            @Override
-                            protected void onPostExecute(Void aVoid) {
-                                super.onPostExecute(aVoid);
-                                //  Toast.makeText(getActivity(), "Download Success", Toast.LENGTH_SHORT).show();
-                            }
-                        }.execute();
-//
+                        Response_pembayaran data = response.body();
+                        //Toast.makeText(ctx, ""+ response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.i("isi_data", "onResponse: "+data);
+                        if (data != null && data.getDataSetoran() != null) {
+                            List<DataKasbonItem> result = data.getDataKasbon();
+                            countryView.kasbon(result);
+                        }
+                        if (data != null && data.getDataSetoran() != null) {
+                            List<DataSetoranItem_pembayaran> result = data.getDataSetoran();
+                            countryView.pembayaran(result);
+                        }
+                      int zize = data.getDataSetoran().size();
+                      if (zize == 0){
+                          finalPDialog.dismiss();
+                          countryView.gagal("tidak ada");
+
+                      }else {
+                          finalPDialog.dismiss();
+                          countryView.sukses("ada");
+                      }
 
                     }
                 } catch (Exception e) {
@@ -328,7 +314,7 @@ public class mobil {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<Response_pembayaran> call, Throwable t) {
                 t.printStackTrace();
                 finalPDialog.dismiss();
                 Log.i("cek_error", "onFailure: " + t);

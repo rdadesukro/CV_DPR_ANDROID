@@ -1,7 +1,9 @@
 package com.example.cv_dpr.view.activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -18,12 +21,15 @@ import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
 import com.example.cv_dpr.R;
+import com.example.cv_dpr.model.pembyaran.DataKasbonItem;
+import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
 import com.example.cv_dpr.presnter.mobil;
 import com.example.cv_dpr.view.mobil_view;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class menu_pembayaran extends AppCompatActivity implements mobil_view {
@@ -195,6 +201,7 @@ public class menu_pembayaran extends AppCompatActivity implements mobil_view {
         btnrekap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("data_kirim", "onClick: "+id+" "+jenis+" "+editTanggalMuali.getText().toString().trim()+" "+editTanggalAkhir.getText().toString().trim());
                 mobil.get_rekapan(id,jenis,waktu,editTanggalMuali.getText().toString().trim(),editTanggalAkhir.getText().toString().trim());
 
             }
@@ -217,11 +224,29 @@ public class menu_pembayaran extends AppCompatActivity implements mobil_view {
 
     @Override
     public void sukses(String pesan) {
+        Toast.makeText(this, ""+pesan, Toast.LENGTH_SHORT).show();
+        Intent ii=new Intent(this, menu_data_pembayaran.class);
+        ii.putExtra("id", id);
+        ii.putExtra("jenis", jenis);
+        ii.putExtra("waktu", waktu);
+        ii.putExtra("from", editTanggalMuali.getText().toString().trim());
+        ii.putExtra("to", editTanggalAkhir.getText().toString().trim());
+        startActivity(ii);
 
     }
 
     @Override
     public void gagal(String pesan) {
+        Toast.makeText(this, ""+pesan, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void kasbon(List<DataKasbonItem> kasbon) {
+
+    }
+
+    @Override
+    public void pembayaran(List<DataSetoranItem_pembayaran> pembayaran) {
 
     }
 

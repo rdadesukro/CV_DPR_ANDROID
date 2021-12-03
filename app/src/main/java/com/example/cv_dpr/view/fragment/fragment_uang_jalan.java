@@ -31,7 +31,7 @@ import androidx.transition.TransitionManager;
 
 import com.example.cv_dpr.R;
 import com.example.cv_dpr.adapter.adapter_uang_jalan;
-import com.example.cv_dpr.model.rekapan.DataKasbonItem;
+import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
 import com.example.cv_dpr.model.rekapan.DataSetoranItem;
 import com.example.cv_dpr.presnter.mobil;
 import com.example.cv_dpr.presnter.rekapan;
@@ -330,10 +330,7 @@ public class fragment_uang_jalan extends Fragment implements mobil_view, rekapan
         txtTotol.setText(totol);
     }
 
-    @Override
-    public void kasbon(List<DataKasbonItem> kasbon) {
 
-    }
 
     @Override
     public void edit(int id, int id_sopir, int uang_jalan, int id_pemilik_mobil, String nama_sopir, String nama_pemilik_mobil) {
@@ -405,6 +402,16 @@ public class fragment_uang_jalan extends Fragment implements mobil_view, rekapan
 
     @Override
     public void gagal(String pesan) {
+
+    }
+
+    @Override
+    public void kasbon(List<com.example.cv_dpr.model.pembyaran.DataKasbonItem> kasbon) {
+
+    }
+
+    @Override
+    public void pembayaran(List<DataSetoranItem_pembayaran> pembayaran) {
 
     }
 

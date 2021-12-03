@@ -2,17 +2,15 @@ package com.example.cv_dpr.server;
 
 
 import com.example.cv_dpr.model.mobil.Response_mobil;
+import com.example.cv_dpr.model.pembyaran.Response_pembayaran;
 import com.example.cv_dpr.model.pemilik_mobil.Response_pemilik_mobil;
 import com.example.cv_dpr.model.rekapan.Response_rekapan;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
-import retrofit2.http.Streaming;
 
 
 public interface ApiRequest {
@@ -105,14 +103,13 @@ public interface ApiRequest {
                                           @Field("jenis") String jenis,
                                           @Field("mobil_id") String mobil_id);
 
-
-    @GET("/rekapan")
-    @Streaming
-    Call<ResponseBody> get_rekapan(@Path("id") String id,
-                                   @Path("jenis") String jenis,
-                                   @Path("waktu") String waktu,
-                                   @Path("from") String from,
-                                   @Path("to") String to);
+    @FormUrlEncoded
+    @POST("auth/rekapan")
+    Call<Response_pembayaran> get_rekapan(@Field("id") String id,
+                                          @Field("jenis") String jenis,
+                                          @Field("waktu") String waktu,
+                                          @Field("from") String from,
+                                          @Field("to") String to);
 
 
 

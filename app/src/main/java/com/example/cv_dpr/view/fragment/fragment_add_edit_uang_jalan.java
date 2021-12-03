@@ -17,11 +17,14 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.cv_dpr.R;
+import com.example.cv_dpr.model.pembyaran.DataKasbonItem;
+import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
 import com.example.cv_dpr.presnter.mobil;
 import com.example.cv_dpr.view.mobil_view;
 import com.jpegkit.Jpeg;
 
 import java.io.File;
+import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
@@ -80,6 +83,16 @@ public class fragment_add_edit_uang_jalan extends DialogFragment implements mobi
     public void gagal(String pesan) {
      //  Toasty.success(getActivity(), ""+pesan, Toast.LENGTH_SHORT, true).show();
         Toasty.error(getActivity(), ""+pesan, Toast.LENGTH_SHORT, true).show();
+    }
+
+    @Override
+    public void kasbon(List<DataKasbonItem> kasbon) {
+
+    }
+
+    @Override
+    public void pembayaran(List<DataSetoranItem_pembayaran> pembayaran) {
+
     }
 
 

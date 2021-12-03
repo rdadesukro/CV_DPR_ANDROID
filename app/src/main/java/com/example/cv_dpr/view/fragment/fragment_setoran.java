@@ -27,7 +27,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.cv_dpr.R;
 import com.example.cv_dpr.adapter.adapter_setoran;
-import com.example.cv_dpr.model.rekapan.DataKasbonItem;
 import com.example.cv_dpr.model.rekapan.DataSetoranItem;
 import com.example.cv_dpr.presnter.rekapan;
 import com.example.cv_dpr.view.rekapan_view;
@@ -203,10 +202,6 @@ public class fragment_setoran extends Fragment implements rekapan_view, adapter_
         txtTotol.setText(totol);
     }
 
-    @Override
-    public void kasbon(List<DataKasbonItem> kasbon) {
-
-    }
 
     @Override
     public void edit(int id, String foto,String tanngal_muat,String tanggal_bongkar,String berat_muat,String berat_bongkar,int transportir_id,int harga,String tujuan) {

@@ -1,9 +1,8 @@
 package com.example.cv_dpr.view;
 
 
-import com.example.cv_dpr.model.rekapan.DataKasbonItem;
-import com.example.cv_dpr.model.rekapan.DataSetoranItem;
-import com.example.cv_dpr.model.mobil.DataMobilItem;
+import com.example.cv_dpr.model.pembyaran.DataKasbonItem;
+import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
 
 import java.util.List;
 
@@ -21,8 +20,8 @@ public interface mobil_view {
 
     void sukses(String pesan);
     void gagal(String pesan);
-
-
+    void kasbon(List<DataKasbonItem> kasbon);
+    void pembayaran(List<DataSetoranItem_pembayaran> pembayaran);
 
 
 }

@@ -1,9 +1,8 @@
 package com.example.cv_dpr.view;
 
 
-import com.example.cv_dpr.model.rekapan.DataKasbonItem;
+import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
 import com.example.cv_dpr.model.rekapan.DataSetoranItem;
-
 
 import java.util.List;
 
@@ -18,8 +17,9 @@ import java.util.List;
 public interface rekapan_view {
 
     void rekapan(List<DataSetoranItem> rekapan);
+
     void total_uang_jalan(String totol);
-    void kasbon(List<DataKasbonItem> kasbon);
+
 
 
 }

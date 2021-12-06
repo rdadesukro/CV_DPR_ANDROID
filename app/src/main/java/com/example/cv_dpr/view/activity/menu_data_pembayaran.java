@@ -21,6 +21,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.cv_dpr.R;
 import com.example.cv_dpr.adapter.adapter_kasbon;
 import com.example.cv_dpr.adapter.adapter_pembayaran;
+import com.example.cv_dpr.model.mobil.DataMobilItem;
 import com.example.cv_dpr.model.pembyaran.DataKasbonItem;
 import com.example.cv_dpr.model.pembyaran.DataPemilikMobilItem_mobil;
 import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
@@ -247,6 +248,11 @@ public class menu_data_pembayaran extends AppCompatActivity implements mobil_vie
         }
         Log.i("data_nama", "data_sopir: " + nama_Sopir);
 
+
+    }
+
+    @Override
+    public void data_sopir_new(List<DataMobilItem> data_sopir_new) {
 
     }
 

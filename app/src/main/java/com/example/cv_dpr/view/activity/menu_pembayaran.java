@@ -21,6 +21,7 @@ import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
 import com.example.cv_dpr.R;
+import com.example.cv_dpr.model.mobil.DataMobilItem;
 import com.example.cv_dpr.model.pembyaran.DataKasbonItem;
 import com.example.cv_dpr.model.pembyaran.DataPemilikMobilItem_mobil;
 import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
@@ -259,6 +260,11 @@ public class menu_pembayaran extends AppCompatActivity implements mobil_view {
 
     @Override
     public void data_sopir(List<DataSopirItem_data> sopir) {
+
+    }
+
+    @Override
+    public void data_sopir_new(List<DataMobilItem> data_sopir_new) {
 
     }
 

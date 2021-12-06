@@ -119,6 +119,11 @@ public interface ApiRequest {
                                                                                 @Field("pemilik_mobil_id") int pemilik_mobil_id,
                                                                                 @Field("uang_jalan") String uang_jalan);
 
+    @FormUrlEncoded
+    @POST("auth/simpan_pemilik_mobil")
+    Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> simpan_pemilik_mobil(@Field("nama") String nama,
+                                                                                @Field("jumlah_unit") String pemilik_mobil_id);
+
 
     @FormUrlEncoded
     @POST("auth/edit_uang_jalan")
@@ -126,6 +131,12 @@ public interface ApiRequest {
                                                                                 @Field("pemilik_mobil_id") int pemilik_mobil_id,
                                                                                 @Field("uang_jalan") String uang_jalan,
                                                                               @Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("auth/edit_pemilik_mobil")
+    Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> edit_pemilik_mobil(@Field("id") String id,
+                                                                              @Field("nama") String nama,
+                                                                              @Field("jumlah_unit") String jumlah_unit);
 
     @GET("auth/tampil_setoran")
     Call<Response_rekapan> get_setoran();
@@ -144,6 +155,9 @@ public interface ApiRequest {
 
     @GET("auth/pemilik_mobil")
     Call<Response_pemilik_mobil> get_pemilik_mobil();
+
+    @GET("auth/tampil_mobil")
+    Call<Response_mobil> get_sopir();
 //
 //
 //    @GET("user/jawaban/histori/admin")

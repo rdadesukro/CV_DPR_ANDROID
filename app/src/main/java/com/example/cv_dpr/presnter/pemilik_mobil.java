@@ -100,13 +100,13 @@ public class pemilik_mobil {
     public void get_pemilik_mobil() {
 
         ProgressDialog pDialog = new ProgressDialog(ctx);
-        pDialog = new ProgressDialog(ctx);
-        pDialog.setMessage("Mencari Data...");
-        pDialog.setCancelable(false);
-        pDialog.setCanceledOnTouchOutside(false);
-        pDialog.show();
-        ProgressDialog finalPDialog = pDialog;
-        finalPDialog.setCanceledOnTouchOutside(true);
+//        pDialog = new ProgressDialog(ctx);
+//        pDialog.setMessage("Mencari Data...");
+//        pDialog.setCancelable(false);
+//        pDialog.setCanceledOnTouchOutside(false);
+//        pDialog.show();
+//        ProgressDialog finalPDialog = pDialog;
+//        finalPDialog.setCanceledOnTouchOutside(true);
         ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
         Log.i("isi_server", "isi_server: "+Retroserver_server_AUTH.getClient().baseUrl());
 
@@ -129,7 +129,7 @@ public class pemilik_mobil {
 
                     }
                 } catch (Exception e) {
-                    finalPDialog.dismiss();
+                   // finalPDialog.dismiss();
                     Toast.makeText(ctx, ""+e, Toast.LENGTH_SHORT).show();
                     Log.e("onResponse", "There is an error" + e);
                     e.printStackTrace();
@@ -140,7 +140,7 @@ public class pemilik_mobil {
             @Override
             public void onFailure(Call<Response_pemilik_mobil> call, Throwable t) {
                 t.printStackTrace();
-                finalPDialog.dismiss();
+              //  finalPDialog.dismiss();
                 Log.i("cek_error", "onFailure: " + t);
                 if (t instanceof IOException) {
 
@@ -205,7 +205,60 @@ public class pemilik_mobil {
 
     }
 
+    public void simpan_pemilik_mobil(String id,String nama,String jumlah_unit,String jenis) {
+        ProgressDialog pDialog = new ProgressDialog(ctx);
+        pDialog = new ProgressDialog(ctx);
+        pDialog.setTitle("Mohon Tunggu!!!");
+        pDialog.setMessage("Simpan Data...");
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
+        pDialog.show();
+        ProgressDialog finalPDialog = pDialog;
+        ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
+        Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> sendbio;
 
+        if (jenis.equals("new")){
+            sendbio = api.simpan_pemilik_mobil(nama,jumlah_unit);
+        }else {
+            sendbio = api.edit_pemilik_mobil(id,nama,jumlah_unit);
+        }
+
+        Log.i("Data_data", "simpan_pemilik_mobil: "+jumlah_unit+" "+jenis+" "+id+" "+id);
+
+
+        ProgressDialog finalPDialog1 = pDialog;
+        sendbio.enqueue(new Callback<com.example.cv_dpr.model.rekapan.aksi.Response_aksi>() {
+            @Override
+            public void onResponse(Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> call, Response<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> response) {
+                try {
+                    String kode = response.body().getKode();
+                    String pesan = response.body().getMessage();
+                    //adasdas
+                    Log.i("cek_error_login", "onResponse: "+response.body());
+                    if (kode.equals("1")) {
+                        countryView.sukses(pesan);
+                        finalPDialog1.dismiss();
+
+                    } else {
+                        countryView.gagal(pesan);
+                        finalPDialog1.dismiss();
+                    }
+                }catch (Throwable e){
+                    Toast.makeText(ctx, ""+response.code(), Toast.LENGTH_SHORT).show();
+                    Log.i("cek_error_login", "onResponse: "+e);
+                    finalPDialog.dismiss();
+                }
+
+            }
+            @Override
+            public void onFailure(Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> call, Throwable t) {
+                Log.e("cek_eror_login", "onFailure: "+t);
+
+                Log.d("RETRO", "Falure : " + "Gagal Mengirim Request");
+            }
+        });
+
+    }
 //    public void simpan_setoran(String jenis,String tgl_muat,String tgl_bongkar,String berat_muat,String) {
 //        ProgressDialog pDialog = new ProgressDialog(ctx);
 //        pDialog = new ProgressDialog(ctx);

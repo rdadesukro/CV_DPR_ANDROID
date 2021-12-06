@@ -458,6 +458,62 @@ public class mobil {
 //
 //    }
 
+    public void get_sopir() {
+
+        ProgressDialog pDialog = new ProgressDialog(ctx);
+//        pDialog = new ProgressDialog(ctx);
+//        pDialog.setMessage("Mencari Data...");
+//        pDialog.setCancelable(false);
+//        pDialog.setCanceledOnTouchOutside(false);
+//        pDialog.show();
+//        ProgressDialog finalPDialog = pDialog;
+//        finalPDialog.setCanceledOnTouchOutside(true);
+        ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
+        Log.i("isi_server", "isi_server: "+Retroserver_server_AUTH.getClient().baseUrl());
+
+        Call<Response_mobil> call = api.get_sopir();
+        call.enqueue(new Callback<Response_mobil>() {
+            @Override
+            public void onResponse(Call<Response_mobil> call, Response<Response_mobil> response) {
+
+                try {
+
+                    if (response.isSuccessful()) {
+                        Response_mobil data = response.body();
+                        //Toast.makeText(ctx, ""+ response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.i("isi_data", "onResponse: "+data);
+                        if (data != null && data.getDataMobil() != null) {
+                            List<DataMobilItem> result = data.getDataMobil();
+                            countryView.data_sopir_new(result);
+                        }
+
+
+                    }
+                } catch (Exception e) {
+                    // finalPDialog.dismiss();
+                    Toast.makeText(ctx, ""+e, Toast.LENGTH_SHORT).show();
+                    Log.e("onResponse", "There is an error" + e);
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Response_mobil> call, Throwable t) {
+                t.printStackTrace();
+                //  finalPDialog.dismiss();
+                Log.i("cek_error", "onFailure: " + t);
+                if (t instanceof IOException) {
+
+                    Log.i("cek_error", "onFailure: " + t);
+                } else {
+
+                    Log.i("cek_error", "onFailure: " + t);
+                }
+            }
+        });
+    }
+
     }
 
 

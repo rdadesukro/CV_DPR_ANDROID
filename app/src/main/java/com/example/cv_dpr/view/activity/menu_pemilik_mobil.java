@@ -15,12 +15,13 @@ import com.example.cv_dpr.R;
 import com.example.cv_dpr.adapter.adapter_pemilik_mobil;
 import com.example.cv_dpr.model.pemilik_mobil.DataPemilikMobilItem;
 import com.example.cv_dpr.presnter.pemilik_mobil;
+import com.example.cv_dpr.view.fragment.fragment_add_edit_pemilik_mobil;
 import com.example.cv_dpr.view.pemilik_mobil_view;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class menu_pemilik_mobil extends AppCompatActivity implements pemilik_mobil_view {
+public class menu_pemilik_mobil extends AppCompatActivity implements pemilik_mobil_view,adapter_pemilik_mobil.OnImageClickListener {
 
     com.example.cv_dpr.presnter.pemilik_mobil pemilik_mobil;
     private com.example.cv_dpr.adapter.adapter_pemilik_mobil adapter_pemilik_mobil;
@@ -55,7 +56,7 @@ public class menu_pemilik_mobil extends AppCompatActivity implements pemilik_mob
         try {
           //  Log.i("isi_jawaban", "pertanyaan: " + rekapan);
             // Log.i("cek_data_pertanyaan", "event: " + rekapan.size());
-           adapter_pemilik_mobil = new adapter_pemilik_mobil(this, pemilik_mobil, 1, null);
+           adapter_pemilik_mobil = new adapter_pemilik_mobil(this, pemilik_mobil, 1, this);
             rvAku.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             rvAku.setHasFixedSize(true);
             adapter_pemilik_mobil.notifyDataSetChanged();
@@ -88,5 +89,35 @@ public class menu_pemilik_mobil extends AppCompatActivity implements pemilik_mob
         txtData3 = findViewById(R.id.txt_data3);
         progressBar2 = findViewById(R.id.progressBar2);
         btnAdd3 = findViewById(R.id.btn_add3);
+        btnAdd3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Bundle args = new Bundle();
+                args.putString("jenis", "new");
+                fragment_add_edit_pemilik_mobil newFragment = new fragment_add_edit_pemilik_mobil();
+                newFragment.setArguments(args);
+                newFragment.show(getSupportFragmentManager(), "TAG");
+
+            }
+        });
+    }
+
+    @Override
+    public void edit(int id, String nama, String jumlah_unit) {
+        Bundle args = new Bundle();
+        args.putString("jenis", "edit");
+        args.putString("nama", nama);
+        args.putString("jumlah_unit",jumlah_unit);
+        args.putString("id", String.valueOf(id));
+        fragment_add_edit_pemilik_mobil newFragment = new fragment_add_edit_pemilik_mobil();
+        newFragment.setArguments(args);
+        newFragment.show(getSupportFragmentManager(), "TAG");
+    }
+
+    @Override
+    public void hapus(int id) {
+
     }
 }

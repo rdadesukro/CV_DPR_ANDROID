@@ -15,7 +15,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cv_dpr.R;
-import com.example.cv_dpr.model.pemilik_mobil.DataPemilikMobilItem;
+import com.example.cv_dpr.model.mobil.DataMobilItem;
 
 import java.util.List;
 
@@ -23,17 +23,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class adapter_pemilik_mobil extends RecyclerView.Adapter<adapter_pemilik_mobil.HolderData> {
+public class adapter_sopir extends RecyclerView.Adapter<adapter_sopir.HolderData> {
     private static CountDownTimer countDownTimer;
     String kriim;
     String lat_new,lng_new;
     String lat,lng;
     String jenis;
     private int animation_type = 0;
-    private List<DataPemilikMobilItem> mList ;
+    private List<DataMobilItem> mList ;
     private Context ctx;
     private OnImageClickListener onImageClickListener;
-    public adapter_pemilik_mobil(Context ctx, List<DataPemilikMobilItem> mList , int animation_type, OnImageClickListener onImageClickListener) {
+    public adapter_sopir(Context ctx, List<DataMobilItem> mList , int animation_type, OnImageClickListener onImageClickListener) {
         this.jenis = jenis;
         this.animation_type = animation_type;
         this.mList = mList;
@@ -42,7 +42,7 @@ public class adapter_pemilik_mobil extends RecyclerView.Adapter<adapter_pemilik_
 
     }
     public interface OnImageClickListener {
-        void edit(int id, String nama,String jumlah_unit);
+        void edit(int id, String nama_sopir,String nama,String nopol);
         void hapus(int id);
     }
 
@@ -64,10 +64,10 @@ public class adapter_pemilik_mobil extends RecyclerView.Adapter<adapter_pemilik_
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(final HolderData holder, @SuppressLint("RecyclerView") int position) {
-        final DataPemilikMobilItem dm = mList.get(position);
+        final DataMobilItem dm = mList.get(position);
 
-        holder.txt_nama.setText(dm.getNama());
-        holder.txt_unit.setText(dm.getJumlahUnit()+" Unit");
+        holder.txt_nama.setText(dm.getNamaSopir());
+       // holder.txt_unit.setText(dm.ge()+" Unit");
         holder.txt_tgl.setText(dm.getCreatedAt());
 
 
@@ -114,7 +114,7 @@ public class adapter_pemilik_mobil extends RecyclerView.Adapter<adapter_pemilik_
 
 
 
-        DataPemilikMobilItem dm;
+        DataMobilItem dm;
         int pos;
 
 
@@ -125,8 +125,8 @@ public class adapter_pemilik_mobil extends RecyclerView.Adapter<adapter_pemilik_
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onImageClickListener.edit(dm.getId(),dm.getNama(), String.valueOf(dm.getJumlahUnit()));
-                    Toast.makeText(ctx, ""+dm.getJumlahUnit(), Toast.LENGTH_SHORT).show();
+                    onImageClickListener.edit(dm.getId(),dm.getNamaSopir(), dm.getPemilikMobil().get(0).getNama(),dm.getNopol());
+                    Toast.makeText(ctx, ""+dm.getPemilikMobil().get(0).getNama(), Toast.LENGTH_SHORT).show();
                 }
             });
 

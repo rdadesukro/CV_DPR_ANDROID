@@ -263,6 +263,118 @@ public class mobil {
         });
 
     }
+    public void edit_Setoran(int id,String tgl_muat,String tgl_bongkar,String berat_muat,String berat_bongkar,String tujuan,String harga,String trafportir_id) {
+        ProgressDialog pDialog = new ProgressDialog(ctx);
+        pDialog = new ProgressDialog(ctx);
+        pDialog.setTitle("Mohon Tunggu!!!");
+        pDialog.setMessage("Simpan Data...");
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
+        pDialog.show();
+        ProgressDialog finalPDialog = pDialog;
+        ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
+        Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> sendbio;
+
+
+
+        sendbio = api.edit_setoran(id,
+                harga,
+                tgl_muat,
+                tgl_bongkar,
+                berat_muat,
+                berat_bongkar,
+                tujuan,
+                trafportir_id);
+
+
+
+        ProgressDialog finalPDialog1 = pDialog;
+        sendbio.enqueue(new Callback<com.example.cv_dpr.model.rekapan.aksi.Response_aksi>() {
+            @Override
+            public void onResponse(Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> call, Response<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> response) {
+                try {
+                    String kode = response.body().getKode();
+                    String pesan = response.body().getMessage();
+                    //adasdas
+                    Log.i("cek_error_login", "onResponse: "+response.body());
+                    if (kode.equals("1")) {
+                        countryView.sukses(pesan);
+                        finalPDialog1.dismiss();
+
+                    } else {
+                        countryView.gagal(pesan);
+                        finalPDialog1.dismiss();
+                    }
+                }catch (Throwable e){
+                    Toast.makeText(ctx, ""+response.code(), Toast.LENGTH_SHORT).show();
+                    Log.i("cek_error_login", "onResponse: "+e);
+                    finalPDialog.dismiss();
+                }
+
+            }
+            @Override
+            public void onFailure(Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> call, Throwable t) {
+                Log.e("cek_eror_login", "onFailure: "+t);
+
+                Log.d("RETRO", "Falure : " + "Gagal Mengirim Request");
+            }
+        });
+
+    }
+
+    public void simpan_sopir(int id,String nama_sopir,int id_pemilik_mobil,String jenis_mobil,String nopol,String jenis) {
+        ProgressDialog pDialog = new ProgressDialog(ctx);
+        pDialog = new ProgressDialog(ctx);
+        pDialog.setTitle("Mohon Tunggu!!!");
+        pDialog.setMessage("Simpan Data...");
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
+        pDialog.show();
+        ProgressDialog finalPDialog = pDialog;
+        ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
+        Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> sendbio;
+        Log.i("datadatadada", "onResponse: "+id+" "+nama_sopir+" "+id_pemilik_mobil+" "+jenis+" "+nopol+" "+jenis_mobil);
+
+        if (jenis.equals("new")){
+            sendbio = api.simpan_mobil(nama_sopir,id_pemilik_mobil,jenis_mobil,nopol);
+        }else {
+            sendbio = api.edit_mobil(id,id_pemilik_mobil,jenis_mobil,nopol,nama_sopir);
+        }
+
+
+        ProgressDialog finalPDialog1 = pDialog;
+        sendbio.enqueue(new Callback<com.example.cv_dpr.model.rekapan.aksi.Response_aksi>() {
+            @Override
+            public void onResponse(Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> call, Response<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> response) {
+                try {
+                    String kode = response.body().getKode();
+                    String pesan = response.body().getMessage();
+                    //adasdas
+                    Log.i("cek_error_login", "onResponse: "+response.body());
+                    if (kode.equals("1")) {
+                        countryView.sukses(pesan);
+                        finalPDialog1.dismiss();
+
+                    } else {
+                        countryView.gagal(pesan);
+                        finalPDialog1.dismiss();
+                    }
+                }catch (Throwable e){
+                    Toast.makeText(ctx, ""+response.code(), Toast.LENGTH_SHORT).show();
+                    Log.i("cek_error_login", "onResponse: "+e);
+                    finalPDialog.dismiss();
+                }
+
+            }
+            @Override
+            public void onFailure(Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> call, Throwable t) {
+                Log.e("cek_eror_login", "onFailure: "+t);
+
+                Log.d("RETRO", "Falure : " + "Gagal Mengirim Request");
+            }
+        });
+
+    }
     public void get_rekapan(String id,String jenis,String waktu,String from,String to) {
 
         ProgressDialog pDialog = new ProgressDialog(ctx);

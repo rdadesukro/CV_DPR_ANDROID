@@ -119,6 +119,14 @@ public interface ApiRequest {
                                                                                 @Field("pemilik_mobil_id") int pemilik_mobil_id,
                                                                                 @Field("uang_jalan") String uang_jalan);
 
+
+    @FormUrlEncoded
+    @POST("auth/simpan_mobil")
+    Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> simpan_mobil(@Field("nama_sopir") String nama,
+                                                                           @Field("pemilik_mobil_id") int pemilik_mobil_id,
+                                                                           @Field("jenis") String jenis,
+                                                                           @Field("nopol") String nopol);
+
     @FormUrlEncoded
     @POST("auth/simpan_pemilik_mobil")
     Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> simpan_pemilik_mobil(@Field("nama") String nama,
@@ -131,6 +139,29 @@ public interface ApiRequest {
                                                                                 @Field("pemilik_mobil_id") int pemilik_mobil_id,
                                                                                 @Field("uang_jalan") String uang_jalan,
                                                                               @Field("id") String id);
+
+
+    @FormUrlEncoded
+    @POST("auth/edit_setoran")
+    Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> edit_setoran(@Field("id") int id,
+                                                                              @Field("harga") String harga,
+                                                                              @Field("tgl_muat") String tgl_muat,
+                                                                              @Field("tgl_bongkar") String tgl_bongkar,
+                                                                           @Field("berat_muat") String berat_muat,
+                                                                           @Field("berat_bongkar") String berat_bongkar,
+                                                                           @Field("tujuan") String tujuan,
+                                                                           @Field("transportir_id") String transportir_id);
+
+    @FormUrlEncoded
+    @POST("auth/edit_mobil")
+    Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> edit_mobil(@Field("id") int id,
+                                                                              @Field("pemilik_mobil_id") int pemilik_mobil_id,
+                                                                              @Field("jenis") String jenis,
+                                                                              @Field("nopol") String nopol,
+                                                                         @Field("nama_sopir") String nama_sopir);
+
+
+
 
     @FormUrlEncoded
     @POST("auth/edit_pemilik_mobil")

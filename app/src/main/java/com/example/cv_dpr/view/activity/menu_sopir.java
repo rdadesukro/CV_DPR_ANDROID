@@ -19,6 +19,7 @@ import com.example.cv_dpr.model.pembyaran.DataPemilikMobilItem_mobil;
 import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
 import com.example.cv_dpr.model.pembyaran.DataSopirItem_data;
 import com.example.cv_dpr.presnter.mobil;
+import com.example.cv_dpr.view.fragment.fragment_add_edit_sopir_mobil;
 import com.example.cv_dpr.view.mobil_view;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -52,11 +53,31 @@ public class menu_sopir extends AppCompatActivity implements mobil_view, com.exa
         txtData3 = findViewById(R.id.txt_data3);
         progressBar2 = findViewById(R.id.progressBar2);
         btnAdd3 = findViewById(R.id.btn_add3);
+        btnAdd3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putString("jenis", "new");
+                fragment_add_edit_sopir_mobil newFragment = new  fragment_add_edit_sopir_mobil();
+                newFragment.setArguments(args);
+                newFragment.show(getSupportFragmentManager(), "TAG");
+            }
+        });
     }
 
     @Override
-    public void edit(int id, String nama_sopir,String nama,String nopol) {
-
+    public void edit(int id, String nama_sopir,int pemilik_mobil_id,String nopol,String jenis,String nama_pemilik_mobil) {
+        Bundle args = new Bundle();
+        args.putString("jenis", "edit");
+        args.putString("nama_sopir", nama_sopir);
+        args.putString("jenis_mobil", jenis);
+        args.putString("nama_pemilik", nama_pemilik_mobil);
+        args.putString("nopol", nopol);
+        args.putString("pemilik_mobil_id", String.valueOf(pemilik_mobil_id));
+        args.putString("id", String.valueOf(id));
+        fragment_add_edit_sopir_mobil newFragment = new fragment_add_edit_sopir_mobil();
+        newFragment.setArguments(args);
+        newFragment.show(getSupportFragmentManager(), "TAG");
     }
 
     @Override

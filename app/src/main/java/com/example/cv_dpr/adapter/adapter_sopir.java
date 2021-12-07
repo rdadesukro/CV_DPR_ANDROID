@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,7 +41,7 @@ public class adapter_sopir extends RecyclerView.Adapter<adapter_sopir.HolderData
 
     }
     public interface OnImageClickListener {
-        void edit(int id, String nama_sopir,String nama,String nopol);
+        void edit(int id, String nama_sopir,int pemilik_mobil_id,String nopol,String jenis,String nama_pemilik_mobil);
         void hapus(int id);
     }
 
@@ -125,8 +124,8 @@ public class adapter_sopir extends RecyclerView.Adapter<adapter_sopir.HolderData
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onImageClickListener.edit(dm.getId(),dm.getNamaSopir(), dm.getPemilikMobil().get(0).getNama(),dm.getNopol());
-                    Toast.makeText(ctx, ""+dm.getPemilikMobil().get(0).getNama(), Toast.LENGTH_SHORT).show();
+                    onImageClickListener.edit(dm.getId(),dm.getNamaSopir(), dm.getPemilikMobil().get(0).getId(),dm.getNopol(),dm.getJenis(),dm.getPemilikMobil().get(0).getNama());
+                    //Toast.makeText(ctx, ""+dm.getPemilikMobil().get(0).getNama(), Toast.LENGTH_SHORT).show();
                 }
             });
 

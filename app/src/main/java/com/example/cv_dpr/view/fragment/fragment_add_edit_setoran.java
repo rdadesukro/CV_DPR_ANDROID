@@ -1,6 +1,7 @@
 package com.example.cv_dpr.view.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -27,7 +29,10 @@ import com.example.cv_dpr.view.mobil_view;
 import com.jpegkit.Jpeg;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -45,8 +50,9 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
 
     com.example.cv_dpr.presnter.mobil mobil;
     int id_mobil, id_pemilik_mobil;
+    int id;
 
-    String tujuan,foto,jenis, nama_sopir, uang_jalan, nama_pemilik_mobil, id,berat_bongkar,berat_muat,tanngal_muat,tanggal_bongkar,harga,transportir_id;
+    String tujuan,foto,jenis, nama_sopir, uang_jalan, nama_pemilik_mobil,berat_bongkar,berat_muat,tanngal_muat,tanggal_bongkar,harga,transportir_id;
     private EditText editTglMuat;
     private EditText editBeratMuat;
     private EditText editBeratBongkar;
@@ -56,8 +62,9 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
     private EditText editTujuan;
     private EditText editHarga;
     private EditText editTglBongkar;
-
-
+    DatePickerDialog.OnDateSetListener tgl_muat;
+    DatePickerDialog.OnDateSetListener tgl_bongkar;
+    final Calendar myCalendar = Calendar.getInstance();
     public fragment_add_edit_setoran() {
 
 
@@ -156,7 +163,7 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
 
 
             foto = mArgs.getString("foto");
-            id= mArgs.getString("id");
+            id= Integer.parseInt(mArgs.getString("id"));
             tanngal_muat = mArgs.getString("tanngal_muat");
             tanggal_bongkar = mArgs.getString("tanggal_bongkar");
             berat_muat =  mArgs.getString("berat_muat");
@@ -177,14 +184,23 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
 
         }
 
+        editTglMuat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getActivity(), tgl_muat, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+        editTglBongkar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getActivity(), tgl_bongkar, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
-//
-//        editSopir.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mobil.get_mobil();
-//            }
-//        });
         btnKeluar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,9 +210,42 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mobil.simpan_uang_jalan(id_mobil, id_pemilik_mobil, editUangJalan.getText().toString().trim(), jenis, id);
+                mobil.edit_Setoran(id,
+                        editTglMuat.getText().toString().trim(),
+                        editTglBongkar.getText().toString().trim(),
+                        editBeratMuat.getText().toString().trim(),
+                        editBeratBongkar.getText().toString().trim(),
+                        editTujuan.getText().toString().trim(),
+                        editHarga.getText().toString().trim(),
+                        "1");
             }
         });
+        tgl_muat = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                tgl_muat();
+            }
+
+        };
+        tgl_bongkar = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                tgl_bongkar();
+            }
+
+        };
         return view;
     }
 
@@ -245,5 +294,14 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
         }
     }
 
-
+    private void tgl_muat() {
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        editTglMuat.setText(sdf.format(myCalendar.getTime()));
+    }
+    private void tgl_bongkar() {
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        editTglBongkar.setText(sdf.format(myCalendar.getTime()));
+    }
 }

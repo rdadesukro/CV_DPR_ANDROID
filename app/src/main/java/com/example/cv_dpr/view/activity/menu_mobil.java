@@ -1,20 +1,30 @@
 package com.example.cv_dpr.view.activity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cv_dpr.R;
 import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
+import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
+import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.security.ProviderInstaller;
+import com.krishna.fileloader.FileLoader;
+import com.krishna.fileloader.listener.FileRequestListener;
+import com.krishna.fileloader.pojo.FileResponse;
+import com.krishna.fileloader.request.FileLoadRequest;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -29,10 +39,10 @@ import es.voghdev.pdfviewpager.library.adapter.PDFPagerAdapter;
 import es.voghdev.pdfviewpager.library.remote.DownloadFile;
 import es.voghdev.pdfviewpager.library.util.FileUtil;
 
-public class menu_mobil extends AppCompatActivity implements DownloadFile.Listener{
+public class menu_mobil extends AppCompatActivity implements DownloadFile.Listener, OnLoadCompleteListener, OnPageErrorListener {
 
     private PDFView idPDFView;
-    String pdfurl = "http://10.1.4.63/cv_dpr/public/api/rekapan?id=2&jenis=pemilik%20mobil&waktu=tanggal&from=2021-11-01&to=2021-11-08";
+    String pdfurl = "http://10.1.4.63/cv_dpr/public/api/tampil_pencairan_pdf?jenis=";
     private ProgressBar progressBar;
     private LinearLayout pdfLayout;
 
@@ -41,6 +51,7 @@ public class menu_mobil extends AppCompatActivity implements DownloadFile.Listen
     private PDFPagerAdapter pdfPagerAdapter;
 
     private String url;
+    String id;
 
 
     @Override
@@ -48,6 +59,15 @@ public class menu_mobil extends AppCompatActivity implements DownloadFile.Listen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_mobil);
         initView();
+        Intent iin = getIntent();
+        Bundle b = iin.getExtras();
+        final PDFView pdfView= findViewById(R.id.pdfView);
+        if (b != null) {
+            id = (String) b.get("id");
+
+
+
+        }
         try {
             ProviderInstaller.installIfNeeded(menu_mobil.this);
             SSLContext sslContext;
@@ -58,8 +78,37 @@ public class menu_mobil extends AppCompatActivity implements DownloadFile.Listen
                 | NoSuchAlgorithmException | KeyManagementException e) {
             e.printStackTrace();
         }
-        //new RetrivePDFfromUrl().execute(pdfurl);
-        remotePDFViewPager = new RemotePDFViewPager(this, pdfurl, this);
+      //  new RetrivePDFfromUrl().execute(pdfurl+id);
+       // remotePDFViewPager = new RemotePDFViewPager(this, pdfurl+id, this);
+        FileLoader.with(menu_mobil.this)
+                .load(pdfurl+id,false) //2nd parameter is optioal, pass true to force load from network
+                .fromDirectory("My_PDFs", FileLoader.DIR_INTERNAL)
+                .asFile(new FileRequestListener<File>() {
+                    @Override
+                    public void onLoad(FileLoadRequest request, FileResponse<File> response) {
+
+                        File pdfFile = response.getBody();
+                       // pdfViewProgressBar.setVisibility(View.GONE);
+                        try {
+
+                            pdfView.fromFile(pdfFile)
+                                    .defaultPage(1)
+                                    .enableAnnotationRendering(true)
+                                    .onLoad(menu_mobil.this)
+                                    .scrollHandle(new DefaultScrollHandle(menu_mobil.this))
+                                    .spacing(10) // in dp
+                                    .load();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(FileLoadRequest request, Throwable t) {
+                       // pdfViewProgressBar.setVisibility(View.GONE);
+                        Toast.makeText(menu_mobil.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     private void initView() {
@@ -98,6 +147,17 @@ public class menu_mobil extends AppCompatActivity implements DownloadFile.Listen
             pdfPagerAdapter.close();
         }
     }
+
+    @Override
+    public void loadComplete(int nbPages) {
+
+    }
+
+    @Override
+    public void onPageError(int page, Throwable t) {
+
+    }
+
     class RetrivePDFfromUrl extends AsyncTask<String, Void, InputStream> {
         @Override
         protected InputStream doInBackground(String... strings) {

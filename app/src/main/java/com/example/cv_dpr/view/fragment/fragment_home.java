@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.example.cv_dpr.R;
 import com.example.cv_dpr.view.activity.menu_pembayaran;
 import com.example.cv_dpr.view.activity.menu_pemilik_mobil;
+import com.example.cv_dpr.view.activity.menu_pencairan;
 import com.example.cv_dpr.view.activity.menu_sopir;
 import com.example.cv_dpr.view.activity.menu_transportir;
 
@@ -25,7 +26,7 @@ public class fragment_home extends Fragment {
     private CardView cardAbsen;
     private CardView cardTugas;
     private CardView cardMateri;
-    private CardView cardBayar;
+    private CardView cardBayar,card_kasi;
 
     public fragment_home() {
         // Required empty public constructor
@@ -70,10 +71,18 @@ public class fragment_home extends Fragment {
         cardTugas = v.findViewById(R.id.card_tugas);
         cardMateri = v.findViewById(R.id.card_materi);
         cardBayar =  v.findViewById(R.id.card_bayar);
+        card_kasi =  v.findViewById(R.id.card_kasi);
         cardTugas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent materi = new Intent(getActivity(), menu_sopir.class);
+                startActivity(materi);
+            }
+        });
+        card_kasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent materi = new Intent(getActivity(), menu_pencairan.class);
                 startActivity(materi);
             }
         });

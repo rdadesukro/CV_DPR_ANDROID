@@ -4,6 +4,7 @@ package com.example.cv_dpr.server;
 import com.example.cv_dpr.model.mobil.Response_mobil;
 import com.example.cv_dpr.model.pembyaran.Response_pembayaran;
 import com.example.cv_dpr.model.pemilik_mobil.Response_pemilik_mobil;
+import com.example.cv_dpr.model.pencairan.Response_cair;
 import com.example.cv_dpr.model.rekapan.Response_rekapan;
 import com.example.cv_dpr.model.trasnportir.Response_trasnportir;
 
@@ -120,6 +121,10 @@ public interface ApiRequest {
                                                                                 @Field("pemilik_mobil_id") int pemilik_mobil_id,
                                                                                 @Field("uang_jalan") String uang_jalan);
 
+
+    @FormUrlEncoded
+    @POST("auth/tampil_pencairan")
+    Call<Response_cair> tampil_pencairan(@Field("jenis") int jenis);
 
     @FormUrlEncoded
     @POST("auth/simpan_mobil")

@@ -5,6 +5,7 @@ import com.example.cv_dpr.model.mobil.Response_mobil;
 import com.example.cv_dpr.model.pembyaran.Response_pembayaran;
 import com.example.cv_dpr.model.pemilik_mobil.Response_pemilik_mobil;
 import com.example.cv_dpr.model.rekapan.Response_rekapan;
+import com.example.cv_dpr.model.trasnportir.Response_trasnportir;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -183,6 +184,9 @@ public interface ApiRequest {
 
     @GET("auth/tampil_mobil")
     Call<Response_mobil> get_mobil();
+
+    @GET("auth/tampil_transportir")
+    Call<Response_trasnportir> tampil_transportir();
 
     @GET("auth/pemilik_mobil")
     Call<Response_pemilik_mobil> get_pemilik_mobil();

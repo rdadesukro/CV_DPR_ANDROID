@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
@@ -24,12 +25,18 @@ import com.example.cv_dpr.model.pembyaran.DataKasbonItem;
 import com.example.cv_dpr.model.pembyaran.DataPemilikMobilItem_mobil;
 import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
 import com.example.cv_dpr.model.pembyaran.DataSopirItem_data;
+import com.example.cv_dpr.model.trasnportir.DataTransportirItem;
 import com.example.cv_dpr.presnter.mobil;
+import com.example.cv_dpr.presnter.trasnportir;
 import com.example.cv_dpr.view.mobil_view;
+import com.example.cv_dpr.view.trasnportir_view;
+import com.example.spinner_dialog.OnSpinerItemClick;
+import com.example.spinner_dialog.SpinnerDialog;
 import com.jpegkit.Jpeg;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -38,7 +45,7 @@ import java.util.Locale;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class fragment_add_edit_setoran extends DialogFragment implements mobil_view {
+public class fragment_add_edit_setoran extends DialogFragment implements mobil_view, trasnportir_view {
 
 
     private static final String TAG = "fragment_camera";
@@ -47,7 +54,12 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
     private EditText editPemilikMobil;
     private EditText editUangJalan;
     private Button btnSimpan;
+    SpinnerDialog spinnerDialog;
+    String nama;
+    int id_trasnportir;
+    private List<String> array_nama_trasnportir = new ArrayList<String>();
 
+    private List<Integer> array_transportir_id= new ArrayList<Integer>();
     com.example.cv_dpr.presnter.mobil mobil;
     int id_mobil, id_pemilik_mobil;
     int id;
@@ -62,6 +74,7 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
     private EditText editTujuan;
     private EditText editHarga;
     private EditText editTglBongkar;
+    com.example.cv_dpr.presnter.trasnportir trasnportir;
     DatePickerDialog.OnDateSetListener tgl_muat;
     DatePickerDialog.OnDateSetListener tgl_bongkar;
     final Calendar myCalendar = Calendar.getInstance();
@@ -137,6 +150,47 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
 
     }
 
+    @Override
+    public void data_transportir(String nama, int id) {
+
+    }
+
+    @Override
+    public void transportir(List<DataTransportirItem> transportir) {
+        array_nama_trasnportir.clear();
+        array_transportir_id.clear();
+
+        for (int i = 0; i < transportir.size(); i++) {
+            nama = transportir.get(i).getNamaTransportir();
+            id_trasnportir = transportir.get(i).getId();
+
+            array_nama_trasnportir.add(nama);
+            array_transportir_id.add(id_trasnportir);
+
+        }
+        spinnerDialog = new SpinnerDialog((AppCompatActivity) getContext(), (ArrayList<String>) array_nama_trasnportir, "Pilih Sopir Mobil");
+        spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+            @Override
+            public void onClick(String item, int position) {
+                String nama_sop = array_nama_trasnportir.get(position);
+                int id_mobil = array_transportir_id.get(position);
+
+                editTransportir.setText(nama_sop);
+
+
+
+            }
+        });
+
+        if (spinnerDialog == null) {
+           // Toast.makeText(ctx, "jaringan bermasalah...", Toast.LENGTH_SHORT);
+        } else {
+           //finalPDialog.dismiss();
+            spinnerDialog.showSpinerDialog("muncul");
+            // pd.dismiss();
+        }
+    }
+
 
     public interface OnInputListener {
         void onSimpanClick(Jpeg data, File file);
@@ -152,6 +206,7 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
 
         initView(view);
         mobil = new mobil(this, getActivity());
+        trasnportir = new trasnportir(this,getActivity());
 
 
         Bundle mArgs = getArguments();
@@ -246,6 +301,12 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
             }
 
         };
+        editTransportir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                trasnportir.get_trasnporir();
+            }
+        });
         return view;
     }
 

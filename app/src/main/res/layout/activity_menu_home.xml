@@ -4,7 +4,8 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.menu.menu_utama" >
+    tools:viewBindingIgnore="true"
+    tools:context=".view.activity.menu_utama" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

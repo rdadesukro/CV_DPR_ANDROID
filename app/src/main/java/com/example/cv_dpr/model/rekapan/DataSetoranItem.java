@@ -41,6 +41,27 @@ public class DataSetoranItem{
 
 	String jumlah_bersih_new;
 
+
+	String berat_muat_new;
+
+	public String getBerat_muat_new() {
+		return berat_muat_new;
+	}
+
+	public void setBerat_muat_new(String berat_muat_new) {
+		this.berat_muat_new = berat_muat_new;
+	}
+
+	public String getBerat_bongkar_new() {
+		return berat_bongkar_new;
+	}
+
+	public void setBerat_bongkar_new(String berat_bongkar_new) {
+		this.berat_bongkar_new = berat_bongkar_new;
+	}
+
+	String berat_bongkar_new;
+
 	@SerializedName("berat_muat")
 	private String beratMuat;
 

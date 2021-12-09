@@ -16,7 +16,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.cv_dpr.R;
-import com.example.cv_dpr.presnter.mobil;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.jpegkit.Jpeg;
@@ -48,13 +47,13 @@ public class fragment_filter extends DialogFragment {
     private void initView(View V) {
 
 
-        btnCari = V.findViewById(R.id.btn_cari);
-        editNamaSopir = V.findViewById(R.id.edit_nama_sopir);
-        grupWaktu = V.findViewById(R.id.grup_waktu);
-        btnTangal = V.findViewById(R.id.btn_tangal);
-        btnToday = V.findViewById(R.id.btn_today);
-        btnKemarin = V.findViewById(R.id.btn_kemarin);
-        btnClose =  V.findViewById(R.id.btn_close);
+//        btnCari = V.findViewById(R.id.btn_cari);
+//        editNamaSopir = V.findViewById(R.id.edit_nama_sopir);
+//        grupWaktu = V.findViewById(R.id.grup_waktu);
+//        btnTangal = V.findViewById(R.id.btn_tangal);
+//        btnToday = V.findViewById(R.id.btn_today);
+//        btnKemarin = V.findViewById(R.id.btn_kemarin);
+//        btnClose =  V.findViewById(R.id.btn_close);
     }
 
 

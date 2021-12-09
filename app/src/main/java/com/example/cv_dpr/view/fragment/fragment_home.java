@@ -13,6 +13,7 @@ import com.example.cv_dpr.R;
 import com.example.cv_dpr.view.activity.menu_pembayaran;
 import com.example.cv_dpr.view.activity.menu_pemilik_mobil;
 import com.example.cv_dpr.view.activity.menu_sopir;
+import com.example.cv_dpr.view.activity.menu_transportir;
 
 import butterknife.ButterKnife;
 
@@ -87,6 +88,13 @@ public class fragment_home extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent materi = new Intent(getActivity(), menu_pembayaran.class);
+                startActivity(materi);
+            }
+        });
+        cardAbsen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent materi = new Intent(getActivity(), menu_transportir.class);
                 startActivity(materi);
             }
         });

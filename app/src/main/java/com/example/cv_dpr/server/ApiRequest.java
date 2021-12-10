@@ -1,6 +1,7 @@
 package com.example.cv_dpr.server;
 
 
+import com.example.cv_dpr.model.buat_pdf.Response_pdf;
 import com.example.cv_dpr.model.mobil.Response_mobil;
 import com.example.cv_dpr.model.pembyaran.Response_pembayaran;
 import com.example.cv_dpr.model.pemilik_mobil.Response_pemilik_mobil;
@@ -125,6 +126,11 @@ public interface ApiRequest {
     @FormUrlEncoded
     @POST("auth/tampil_pencairan")
     Call<Response_cair> tampil_pencairan(@Field("jenis") int jenis);
+
+    @FormUrlEncoded
+    @POST("auth/tampil_pencairan_pdf")
+    Call<Response_pdf> tampil_pencairan_pdf(@Field("jenis") String jenis,
+                                        @Field("transportir_id") int transportir_id);
 
     @FormUrlEncoded
     @POST("auth/simpan_mobil")

@@ -31,6 +31,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.net.ssl.SSLContext;
 
@@ -78,10 +80,12 @@ public class menu_mobil extends AppCompatActivity implements DownloadFile.Listen
                 | NoSuchAlgorithmException | KeyManagementException e) {
             e.printStackTrace();
         }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
+        String currentDateandTime = sdf.format(new Date());
       //  new RetrivePDFfromUrl().execute(pdfurl+id);
        // remotePDFViewPager = new RemotePDFViewPager(this, pdfurl+id, this);
         FileLoader.with(menu_mobil.this)
-                .load(pdfurl+id,false) //2nd parameter is optioal, pass true to force load from network
+                .load(id+"?time="+currentDateandTime,false) //2nd parameter is optioal, pass true to force load from network
                 .fromDirectory("My_PDFs", FileLoader.DIR_INTERNAL)
                 .asFile(new FileRequestListener<File>() {
                     @Override

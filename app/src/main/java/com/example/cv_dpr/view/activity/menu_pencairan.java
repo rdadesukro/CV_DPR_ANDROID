@@ -60,7 +60,8 @@ public class menu_pencairan extends AppCompatActivity implements adapter_cair.On
         bind.btnCekRekap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cair.get_pencairan(id_mobil);
+
+                cair.get_rekapan_pdf(id_mobil,"cek_rekapan");
             }
         });
         bind.swifeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -84,10 +85,10 @@ public class menu_pencairan extends AppCompatActivity implements adapter_cair.On
     }
 
     @Override
-    public void sukses(String pesan) {
+    public void sukses(String pesan,String loaksi) {
         Toast.makeText(this, ""+pesan, Toast.LENGTH_SHORT).show();
         Intent ii=new Intent(this, menu_mobil.class);
-        ii.putExtra("id", ""+id_mobil);
+        ii.putExtra("id", loaksi);
         startActivity(ii);
     }
 

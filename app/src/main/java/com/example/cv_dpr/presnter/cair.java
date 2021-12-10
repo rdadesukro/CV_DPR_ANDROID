@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.cv_dpr.model.buat_pdf.Response_pdf;
 import com.example.cv_dpr.model.pencairan.DataSeotoranItem_cair;
 import com.example.cv_dpr.model.pencairan.Response_cair;
 import com.example.cv_dpr.model.trasnportir.DataTransportirItem;
@@ -134,7 +135,7 @@ public class cair {
                           countryView.gagal("data tidak ada");
 
                       }else {
-                          countryView.sukses("data tidak ada");
+                         // countryView.sukses("data tidak ada");
                           if (data != null && data.getDataSeotoran() != null) {
                               List<DataSeotoranItem_cair> result = data.getDataSeotoran();
                               countryView.data_cair(result);
@@ -150,6 +151,59 @@ public class cair {
             }
             @Override
             public void onFailure(Call<Response_cair> call, Throwable t) {
+                Log.e("cek_eror_login", "onFailure: "+t);
+
+                Log.d("RETRO", "Falure : " + "Gagal Mengirim Request");
+            }
+        });
+
+    }
+
+    public void get_rekapan_pdf(int transportir_id,String jenis) {
+        ProgressDialog pDialog = new ProgressDialog(ctx);
+        pDialog = new ProgressDialog(ctx);
+        pDialog.setTitle("Mohon Tunggu!!!");
+        pDialog.setMessage("Mencari Data...");
+        pDialog.setCancelable(false);
+        pDialog.setCanceledOnTouchOutside(false);
+        pDialog.show();
+        ProgressDialog finalPDialog = pDialog;
+        ApiRequest api = Retroserver_server_AUTH.getClient().create(ApiRequest.class);
+        Call<Response_pdf> sendbio;
+
+
+        sendbio = api.tampil_pencairan_pdf(jenis,transportir_id);
+
+
+        ProgressDialog finalPDialog1 = pDialog;
+        sendbio.enqueue(new Callback<Response_pdf>() {
+            @Override
+            public void onResponse(Call<Response_pdf> call, Response<Response_pdf> response) {
+
+                try {
+
+                    if (response.isSuccessful()) {
+                        finalPDialog.dismiss();
+                        Response_pdf data = response.body();
+                        String pesan = data.getMessage();
+                        String lokasi= data.getLokasi();
+                        if (data.isKode()){
+                            countryView.sukses(pesan,lokasi);
+                        }else {
+                            countryView.gagal(pesan);
+                        }
+
+
+                    }
+                } catch (Exception e) {
+                    Log.i("cek_", "onResponse: "+e);
+                    finalPDialog.dismiss();
+                    Log.e("onResponse", "There is an error" + e);
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<Response_pdf> call, Throwable t) {
                 Log.e("cek_eror_login", "onFailure: "+t);
 
                 Log.d("RETRO", "Falure : " + "Gagal Mengirim Request");

@@ -17,7 +17,7 @@ import java.util.List;
 public interface cair_view {
 
 
-    void sukses(String pesan);
+    void sukses(String pesan,String lokasi);
     void gagal(String pesan);
     void data_cair(List<DataSeotoranItem_cair> data_cair);
     void transportir(List<DataTransportirItem> transportir);

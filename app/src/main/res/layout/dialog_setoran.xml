@@ -255,14 +255,16 @@
                 android:fontFamily="@font/opensansbold"
                 android:text="Foto DO"
                 android:textColor="@color/grey_1000"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_12sdp"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/img_foto_do"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:background="@color/grey_1000"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/button"

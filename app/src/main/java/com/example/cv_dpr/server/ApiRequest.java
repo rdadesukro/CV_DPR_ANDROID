@@ -8,6 +8,7 @@ import com.example.cv_dpr.model.pemilik_mobil.Response_pemilik_mobil;
 import com.example.cv_dpr.model.pencairan.Response_cair;
 import com.example.cv_dpr.model.rekapan.Response_rekapan;
 import com.example.cv_dpr.model.trasnportir.Response_trasnportir;
+import com.example.cv_dpr.model.tujuan.Response_tujuan;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -117,7 +118,7 @@ public interface ApiRequest {
 
 
     @FormUrlEncoded
-    @POST("auth/simpan_setoran")
+    @POST("auth/simpan_uang_jalan")
     Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> simpan_uang_jalan(@Field("mobil_id") int mobil_id,
                                                                                 @Field("pemilik_mobil_id") int pemilik_mobil_id,
                                                                                 @Field("uang_jalan") String uang_jalan);
@@ -195,6 +196,14 @@ public interface ApiRequest {
 
     @GET("auth/tampil_mobil")
     Call<Response_mobil> get_mobil();
+
+//    @FormUrlEncoded
+//    @POST("auth/Response_tujuan")
+//    Call<Response_tujuan> tampil_tujuan();
+
+
+    @GET("auth/tampil_tujuan")
+    Call<Response_tujuan> tampil_tujuan();
 
     @GET("auth/tampil_transportir")
     Call<Response_trasnportir> tampil_transportir();

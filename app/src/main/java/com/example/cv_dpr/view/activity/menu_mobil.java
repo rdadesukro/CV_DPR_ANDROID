@@ -44,7 +44,7 @@ import es.voghdev.pdfviewpager.library.util.FileUtil;
 public class menu_mobil extends AppCompatActivity implements DownloadFile.Listener, OnLoadCompleteListener, OnPageErrorListener {
 
     private PDFView idPDFView;
-    String pdfurl = "http://10.1.4.63/cv_dpr/public/api/tampil_pencairan_pdf?jenis=";
+    String pdfurl = "http://192.168.43.48/cv_dpr/public/api/tampil_pencairan_pdf?jenis=";
     private ProgressBar progressBar;
     private LinearLayout pdfLayout;
 

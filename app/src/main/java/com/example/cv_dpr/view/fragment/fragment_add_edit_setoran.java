@@ -26,10 +26,14 @@ import com.example.cv_dpr.model.pembyaran.DataPemilikMobilItem_mobil;
 import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
 import com.example.cv_dpr.model.pembyaran.DataSopirItem_data;
 import com.example.cv_dpr.model.trasnportir.DataTransportirItem;
+import com.example.cv_dpr.model.tujuan.DataHargaItem_tujan;
 import com.example.cv_dpr.presnter.mobil;
 import com.example.cv_dpr.presnter.trasnportir;
+import com.example.cv_dpr.presnter.tujuan;
+import com.example.cv_dpr.view.activity.menu_pencairan;
 import com.example.cv_dpr.view.mobil_view;
 import com.example.cv_dpr.view.trasnportir_view;
+import com.example.cv_dpr.view.tujuan_view;
 import com.example.spinner_dialog.OnSpinerItemClick;
 import com.example.spinner_dialog.SpinnerDialog;
 import com.jpegkit.Jpeg;
@@ -45,7 +49,7 @@ import java.util.Locale;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class fragment_add_edit_setoran extends DialogFragment implements mobil_view, trasnportir_view {
+public class fragment_add_edit_setoran extends DialogFragment implements mobil_view, trasnportir_view, tujuan_view {
 
 
     private static final String TAG = "fragment_camera";
@@ -55,16 +59,20 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
     private EditText editUangJalan;
     private Button btnSimpan;
     SpinnerDialog spinnerDialog;
-    String nama;
-    int id_trasnportir;
+    String nama_tranportir,nama_tujuan,harga;
+    int id_trasnportir,id_tujuan;
     private List<String> array_nama_trasnportir = new ArrayList<String>();
+    private List<String> array_nama_tujuan = new ArrayList<String>();
+    private List<String> array_harga = new ArrayList<String>();
 
     private List<Integer> array_transportir_id= new ArrayList<Integer>();
+    private List<Integer> array_tujuan_id= new ArrayList<Integer>();
     com.example.cv_dpr.presnter.mobil mobil;
     int id_mobil, id_pemilik_mobil;
     int id;
+    com.example.cv_dpr.presnter.tujuan tujuan;
 
-    String tujuan,foto,jenis, nama_sopir, uang_jalan, nama_pemilik_mobil,berat_bongkar,berat_muat,tanngal_muat,tanggal_bongkar,harga,transportir_id;
+    String tujuan_new,foto,jenis, nama_sopir, uang_jalan, nama_pemilik_mobil,berat_bongkar,berat_muat,tanngal_muat,tanggal_bongkar,transportir_id;
     private EditText editTglMuat;
     private EditText editBeratMuat;
     private EditText editBeratBongkar;
@@ -157,25 +165,42 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
 
     @Override
     public void transportir(List<DataTransportirItem> transportir) {
+
+    }
+
+    @Override
+    public void tujuan(List<DataHargaItem_tujan> tujuan) {
         array_nama_trasnportir.clear();
+        array_nama_tujuan.clear();
         array_transportir_id.clear();
 
-        for (int i = 0; i < transportir.size(); i++) {
-            nama = transportir.get(i).getNamaTransportir();
-            id_trasnportir = transportir.get(i).getId();
+        for (int i = 0; i < tujuan.size(); i++) {
+            nama_tranportir = tujuan.get(i).getTransportir().get(0).getNamaTransportir();
+            nama_tujuan = tujuan.get(i).getTujuan();
+            harga  = String.valueOf(tujuan.get(i).getHarga());
+            id_trasnportir = tujuan.get(i).getTransportir().get(0).getId();
+            id_tujuan = tujuan.get(i).getId();
 
-            array_nama_trasnportir.add(nama);
+            array_nama_tujuan.add(nama_tujuan);
+            array_nama_trasnportir.add(nama_tranportir);
             array_transportir_id.add(id_trasnportir);
+            array_harga.add(harga);
+            array_tujuan_id.add(id_tujuan);
 
         }
-        spinnerDialog = new SpinnerDialog((AppCompatActivity) getContext(), (ArrayList<String>) array_nama_trasnportir, "Pilih Sopir Mobil");
+        spinnerDialog = new SpinnerDialog((AppCompatActivity) getContext(), (ArrayList<String>) array_nama_tujuan, "Pilih Sopir Mobil");
         spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
             public void onClick(String item, int position) {
-                String nama_sop = array_nama_trasnportir.get(position);
+                String trportir = array_nama_trasnportir.get(position);
+                String hg = array_harga.get(position);
+                String tjn = array_nama_tujuan.get(position);
                 int id_mobil = array_transportir_id.get(position);
 
-                editTransportir.setText(nama_sop);
+                editTransportir.setText(trportir);
+                editHarga.setText(""+hg);
+                editTujuan.setText(tjn);
+
 
 
 
@@ -183,9 +208,9 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
         });
 
         if (spinnerDialog == null) {
-           // Toast.makeText(ctx, "jaringan bermasalah...", Toast.LENGTH_SHORT);
+            // Toast.makeText(ctx, "jaringan bermasalah...", Toast.LENGTH_SHORT);
         } else {
-           //finalPDialog.dismiss();
+            //finalPDialog.dismiss();
             spinnerDialog.showSpinerDialog("muncul");
             // pd.dismiss();
         }
@@ -206,6 +231,7 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
 
         initView(view);
         mobil = new mobil(this, getActivity());
+        tujuan = new tujuan(this,getActivity());
         trasnportir = new trasnportir(this,getActivity());
 
 
@@ -225,7 +251,7 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
             berat_bongkar =  mArgs.getString("berat_bongkar");
             transportir_id =  mArgs.getString("transportir_id");
             harga = mArgs.getString ("harga");
-            tujuan =  mArgs.getString("tujuan");
+            tujuan_new =  mArgs.getString("tujuan");
 
 
             editTglMuat.setText(tanngal_muat);
@@ -234,7 +260,7 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
             editBeratBongkar.setText(berat_bongkar);
             editTransportir.setText(transportir_id);
             editHarga.setText(harga);
-            editTujuan.setText(tujuan);
+            editTujuan.setText(tujuan_new);
 
 
         }
@@ -301,10 +327,10 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
             }
 
         };
-        editTransportir.setOnClickListener(new View.OnClickListener() {
+        editTujuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                trasnportir.get_trasnporir();
+                tujuan.get_tujuan();
             }
         });
         return view;

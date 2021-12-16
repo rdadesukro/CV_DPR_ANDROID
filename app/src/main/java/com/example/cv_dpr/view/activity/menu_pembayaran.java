@@ -27,7 +27,9 @@ import com.example.cv_dpr.model.pembyaran.DataPemilikMobilItem_mobil;
 import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
 import com.example.cv_dpr.model.pembyaran.DataSopirItem_data;
 import com.example.cv_dpr.presnter.mobil;
+import com.example.cv_dpr.presnter.pembayaran;
 import com.example.cv_dpr.view.mobil_view;
+import com.example.cv_dpr.view.pembayaran_view;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
@@ -35,7 +37,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class menu_pembayaran extends AppCompatActivity implements mobil_view {
+public class menu_pembayaran extends AppCompatActivity implements mobil_view, pembayaran_view {
 
     private CardView cardView4;
     private ConstraintLayout conCari;
@@ -59,6 +61,7 @@ public class menu_pembayaran extends AppCompatActivity implements mobil_view {
     private ImageView btnShow;
     String waktu;
     com.example.cv_dpr.presnter.mobil mobil;
+    com.example.cv_dpr.presnter.pembayaran pembayaran;
     String jenis = "pemilik mobil";
     String id;
     final Calendar myCalendar = Calendar.getInstance();
@@ -71,6 +74,7 @@ public class menu_pembayaran extends AppCompatActivity implements mobil_view {
         setContentView(R.layout.activity_menu_pembayaran);
         initView();
         mobil = new mobil(this,menu_pembayaran.this);
+        pembayaran = new pembayaran(this,menu_pembayaran.this);
         btnShow.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
         tgl_mualai = new DatePickerDialog.OnDateSetListener() {
 
@@ -205,7 +209,7 @@ public class menu_pembayaran extends AppCompatActivity implements mobil_view {
             @Override
             public void onClick(View v) {
                 Log.i("data_kirim", "onClick: "+id+" "+jenis+" "+editTanggalMuali.getText().toString().trim()+" "+editTanggalAkhir.getText().toString().trim());
-                mobil.get_rekapan(id,jenis,waktu,editTanggalMuali.getText().toString().trim(),editTanggalAkhir.getText().toString().trim());
+                pembayaran.get_pembayaran_pdf(id,jenis,waktu,editTanggalMuali.getText().toString().trim(),editTanggalAkhir.getText().toString().trim());
 
             }
         });
@@ -227,15 +231,23 @@ public class menu_pembayaran extends AppCompatActivity implements mobil_view {
 
     @Override
     public void sukses(String pesan) {
-        Toast.makeText(this, ""+pesan, Toast.LENGTH_SHORT).show();
-        Intent ii=new Intent(this, menu_data_pembayaran.class);
-        ii.putExtra("id", id);
-        ii.putExtra("jenis", jenis);
-        ii.putExtra("waktu", waktu);
-        ii.putExtra("from", editTanggalMuali.getText().toString().trim());
-        ii.putExtra("to", editTanggalAkhir.getText().toString().trim());
-        startActivity(ii);
+//        Toast.makeText(this, ""+pesan, Toast.LENGTH_SHORT).show();
+//        Intent ii=new Intent(this, menu_data_pembayaran.class);
+//        ii.putExtra("id", id);
+//        ii.putExtra("jenis", jenis);
+//        ii.putExtra("waktu", waktu);
+//        ii.putExtra("from", editTanggalMuali.getText().toString().trim());
+//        ii.putExtra("to", editTanggalAkhir.getText().toString().trim());
+//        startActivity(ii);
 
+    }
+
+    @Override
+    public void sukses(String pesan, String lokasi) {
+        Toast.makeText(this, ""+pesan, Toast.LENGTH_SHORT).show();
+        Intent ii=new Intent(this, menu_mobil.class);
+        ii.putExtra("id", lokasi);
+        startActivity(ii);
     }
 
     @Override

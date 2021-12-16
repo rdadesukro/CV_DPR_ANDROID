@@ -14,7 +14,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cv_dpr.R;
-import com.example.cv_dpr.model.rekapan.DataSetoranItem;
+import com.example.cv_dpr.model.setoran.DataSetoranItem_setoran;
+
 
 import java.util.List;
 
@@ -29,10 +30,10 @@ public class adapter_setoran extends RecyclerView.Adapter<adapter_setoran.Holder
     String lat,lng;
     String jenis;
     private int animation_type = 0;
-    private List<DataSetoranItem> mList ;
+    private List<DataSetoranItem_setoran> mList ;
     private Context ctx;
     private OnImageClickListener onImageClickListener;
-    public adapter_setoran(Context ctx, List<DataSetoranItem> mList , int animation_type, OnImageClickListener onImageClickListener) {
+    public adapter_setoran(Context ctx, List<DataSetoranItem_setoran> mList , int animation_type, OnImageClickListener onImageClickListener) {
         this.jenis = jenis;
         this.animation_type = animation_type;
         this.mList = mList;
@@ -41,7 +42,16 @@ public class adapter_setoran extends RecyclerView.Adapter<adapter_setoran.Holder
 
     }
     public interface OnImageClickListener {
-        void edit(int id, String foto,String tanngal_muat,String tanggal_bongkar,String berat_muat,String berat_bongkar,int transportir_id,int harga,String tujuan);
+        void edit(int id,
+                  String foto,
+                  String tanggal_muat,
+                  String tanggal_bongkar,
+                  int berat_muat,
+                  int berat_bongkar,
+                  int transportir_id,
+                  String nama_transportir,
+                  int harga,
+                  String tujuan);
         void hapus(int id);
     }
 
@@ -63,15 +73,15 @@ public class adapter_setoran extends RecyclerView.Adapter<adapter_setoran.Holder
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(final HolderData holder, @SuppressLint("RecyclerView") int position) {
-        final DataSetoranItem dm = mList.get(position);
+        final DataSetoranItem_setoran dm = mList.get(position);
 
         holder.txt_nama.setText(dm.getMobil().getNamaSopir());
-        holder.txt_uang_jalan.setText(""+dm.getUang_jalan_new());
+        holder.txt_uang_jalan.setText(""+dm.getUangJalanNew());
         holder.txt_tgl.setText(dm.getTglAmbilUangJalan());
         holder.txt_tujuan.setText(dm.getTujuan());
-        holder.txt_total_bersih.setText(dm.getJumlah_bersih_new());
-        holder.txt_total_kotor.setText(dm.getJumlah_kotor_new());
-        holder.txt_status.setText(dm.getStatus_pembayaran());
+        holder.txt_total_bersih.setText(dm.getJumlahBersihNew());
+        holder.txt_total_kotor.setText(dm.getJumlahKotorNew());
+        holder.txt_status.setText(dm.getStatusPembayaran());
 
 
 
@@ -125,7 +135,7 @@ public class adapter_setoran extends RecyclerView.Adapter<adapter_setoran.Holder
 
 
 
-        DataSetoranItem dm;
+        DataSetoranItem_setoran dm;
         int pos;
 
 
@@ -135,15 +145,30 @@ public class adapter_setoran extends RecyclerView.Adapter<adapter_setoran.Holder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onImageClickListener.edit(dm.getId(),
-                            dm.getFoto(),
-                            dm.getTglMuat(),
-                            dm.getTglBongkar(),
-                            dm.getBeratMuat(),
-                            dm.getBeratBongkar(),
-                            dm.getTransportirId(),
-                            dm.getHarga(),
-                            dm.getTujuan());
+                    if (dm.getTransporir().size()==0){
+                        onImageClickListener.edit(dm.getId(),
+                                dm.getFoto(),
+                                dm.getTglMuat(),
+                                dm.getTglBongkar(),
+                                dm.getBeratMuat(),
+                                dm.getBeratBongkar(),
+                                dm.getTransportirId(),
+                               "",
+                                dm.getHarga(),
+                                dm.getTujuan());
+                    }else {
+                        onImageClickListener.edit(dm.getId(),
+                                dm.getFoto(),
+                                dm.getTglMuat(),
+                                dm.getTglBongkar(),
+                                dm.getBeratMuat(),
+                                dm.getBeratBongkar(),
+                                dm.getTransportirId(),
+                                dm.getTransporir().get(0).getNamaTransportir(),
+                                dm.getHarga(),
+                                dm.getTujuan());
+                    }
+
                 }
             });
 

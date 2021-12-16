@@ -71,6 +71,7 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
     int id_mobil, id_pemilik_mobil;
     int id;
     com.example.cv_dpr.presnter.tujuan tujuan;
+    String nama_transportir;
 
     String tujuan_new,foto,jenis, nama_sopir, uang_jalan, nama_pemilik_mobil,berat_bongkar,berat_muat,tanngal_muat,tanggal_bongkar,transportir_id;
     private EditText editTglMuat;
@@ -196,6 +197,7 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
                 String hg = array_harga.get(position);
                 String tjn = array_nama_tujuan.get(position);
                 int id_mobil = array_transportir_id.get(position);
+                transportir_id = String.valueOf(array_transportir_id.get(position));
 
                 editTransportir.setText(trportir);
                 editHarga.setText(""+hg);
@@ -241,6 +243,17 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
         if (jenis.equals("new")) {
 
         } else {
+//            args.putString("id", String.valueOf(id));
+//            args.putString("foto", foto);
+//            args.putString("tanngal_muat", tanggal_muat);
+//            args.putString("tanggal_bongkar", tanggal_bongkar);
+//            args.putString("berat_muat", String.valueOf(berat_muat));
+//            args.putString("berat_bongkar", String.valueOf(berat_bongkar));
+//            args.putString("transportir_id", String.valueOf(transportir_id));
+//            args.putString("nama_transportir", nama_transportir);
+//            args.putString("harga", String.valueOf(harga));
+//            args.putString("tujuan", tujuan);
+//            args.putString("jenis","edit");
 
 
             foto = mArgs.getString("foto");
@@ -252,13 +265,14 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
             transportir_id =  mArgs.getString("transportir_id");
             harga = mArgs.getString ("harga");
             tujuan_new =  mArgs.getString("tujuan");
+            nama_tranportir = mArgs.getString("nama_transportir");
 
 
             editTglMuat.setText(tanngal_muat);
             editTglBongkar.setText(tanggal_bongkar);
             editBeratMuat.setText(berat_muat);
             editBeratBongkar.setText(berat_bongkar);
-            editTransportir.setText(transportir_id);
+            editTransportir.setText(nama_tranportir);
             editHarga.setText(harga);
             editTujuan.setText(tujuan_new);
 
@@ -298,7 +312,7 @@ public class fragment_add_edit_setoran extends DialogFragment implements mobil_v
                         editBeratBongkar.getText().toString().trim(),
                         editTujuan.getText().toString().trim(),
                         editHarga.getText().toString().trim(),
-                        "1");
+                        transportir_id);
             }
         });
         tgl_muat = new DatePickerDialog.OnDateSetListener() {

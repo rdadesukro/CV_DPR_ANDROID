@@ -7,6 +7,7 @@ import com.example.cv_dpr.model.pembyaran.Response_pembayaran;
 import com.example.cv_dpr.model.pemilik_mobil.Response_pemilik_mobil;
 import com.example.cv_dpr.model.pencairan.Response_cair;
 import com.example.cv_dpr.model.rekapan.Response_rekapan;
+import com.example.cv_dpr.model.setoran.Response_setoran;
 import com.example.cv_dpr.model.trasnportir.Response_trasnportir;
 import com.example.cv_dpr.model.tujuan.Response_tujuan;
 
@@ -133,6 +134,15 @@ public interface ApiRequest {
     Call<Response_pdf> tampil_pencairan_pdf(@Field("jenis") String jenis,
                                         @Field("transportir_id") int transportir_id);
 
+
+    @FormUrlEncoded
+    @POST("auth/rekapan")
+    Call<Response_pdf> get_pembayaran_pdf(@Field("id") String id,
+                                          @Field("jenis") String jenis,
+                                          @Field("waktu") String waktu,
+                                          @Field("from") String from,
+                                          @Field("to") String to);
+
     @FormUrlEncoded
     @POST("auth/simpan_mobil")
     Call<com.example.cv_dpr.model.rekapan.aksi.Response_aksi> simpan_mobil(@Field("nama_sopir") String nama,
@@ -193,6 +203,13 @@ public interface ApiRequest {
                                           @Field("nama_sopir") String nama_sopir,
                                           @Field("jenis") String jenis,
                                           @Field("tanngal") String tanngal);
+
+    @FormUrlEncoded
+    @POST("auth/tampil_uang_jalan")
+    Call<Response_setoran> tampil_setoran_new(@Field("mobil_id") String mobil_id,
+                                              @Field("nama_sopir") String nama_sopir,
+                                              @Field("jenis") String jenis,
+                                              @Field("tanngal") String tanngal);
 
     @GET("auth/tampil_mobil")
     Call<Response_mobil> get_mobil();

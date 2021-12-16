@@ -36,10 +36,13 @@ import com.example.cv_dpr.model.pembyaran.DataPemilikMobilItem_mobil;
 import com.example.cv_dpr.model.pembyaran.DataSetoranItem_pembayaran;
 import com.example.cv_dpr.model.pembyaran.DataSopirItem_data;
 import com.example.cv_dpr.model.rekapan.DataSetoranItem;
+import com.example.cv_dpr.model.setoran.DataSetoranItem_setoran;
 import com.example.cv_dpr.presnter.mobil;
 import com.example.cv_dpr.presnter.rekapan;
+import com.example.cv_dpr.presnter.setoran;
 import com.example.cv_dpr.view.mobil_view;
 import com.example.cv_dpr.view.rekapan_view;
+import com.example.cv_dpr.view.setoran_view;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -55,7 +58,7 @@ import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
 
-public class fragment_setoran extends Fragment implements mobil_view,rekapan_view, adapter_setoran.OnImageClickListener {
+public class fragment_setoran extends Fragment implements mobil_view, setoran_view, adapter_setoran.OnImageClickListener {
 
 
     private SwipeRefreshLayout swifeRefresh;
@@ -85,6 +88,7 @@ public class fragment_setoran extends Fragment implements mobil_view,rekapan_vie
     private TextInputLayout txtTgl;
     com.example.cv_dpr.presnter.mobil mobil;
     String id_sopir_new;
+    com.example.cv_dpr.presnter.setoran setoran;
 
     public fragment_setoran() {
         // Required empty public constructor
@@ -104,34 +108,18 @@ public class fragment_setoran extends Fragment implements mobil_view,rekapan_vie
         ButterKnife.bind(this, view);
         initView(view);
 
-        rekapan = new rekapan(this, getActivity());
+        setoran = new setoran(this, getActivity());
         //rekapan.get_setoran(mobil_id,cari,jenis,tanggal);
-        rekapan.get_uang_jalan(tanggal, cari, jenis, id_sopir_new);
+        setoran.get_setoran(id_sopir_new, cari, jenis, tanggal);
         mobil = new mobil(this,getActivity());
 
         swifeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                rekapan.get_uang_jalan(tanggal, cari, jenis, id_sopir_new);
+                setoran.get_setoran(id_sopir_new, cari, jenis, tanggal);
 
             }
         });
-
-
-//        rvAku.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                Log.i("isi_rvku", "onScrolled: " + dx + " " + dy);
-//                if (dy > 0 && btnAdd2.getVisibility() == View.VISIBLE) {
-//                    btnAdd2.hide();
-//                } else if (dy < 0 && btnAdd2.getVisibility() != View.VISIBLE) {
-//                    btnAdd2.show();
-//                }
-//            }
-//        });
-
-
 
         return view;
 
@@ -163,12 +151,13 @@ public class fragment_setoran extends Fragment implements mobil_view,rekapan_vie
     }
 
 
+
     @Override
-    public void rekapan(List<DataSetoranItem> rekapan) {
+    public void setoran(List<DataSetoranItem_setoran> setoran) {
         try {
-            Log.i("isi_jawaban", "pertanyaan: " + rekapan);
-            Log.i("cek_data_pertanyaan", "event: " + rekapan.size());
-            adapter_setoran = new adapter_setoran(getActivity(), rekapan, 1, this);
+            Log.i("isi_jawaban", "pertanyaan: " + setoran);
+            Log.i("cek_data_pertanyaan", "event: " + setoran.size());
+            adapter_setoran = new adapter_setoran(getActivity(), setoran, 1, this);
             rvAku.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
             rvAku.setHasFixedSize(true);
             adapter_setoran.notifyDataSetChanged();
@@ -176,7 +165,7 @@ public class fragment_setoran extends Fragment implements mobil_view,rekapan_vie
 
 
             swifeRefresh.setRefreshing(false);
-            if (rekapan.size() == 0) {
+            if (setoran.size() == 0) {
                 progressBar4.setVisibility(View.GONE);
                 txtData.setVisibility(View.VISIBLE);
                 imgData.setVisibility(View.VISIBLE);
@@ -191,7 +180,6 @@ public class fragment_setoran extends Fragment implements mobil_view,rekapan_vie
         } catch (Exception e) {
 
         }
-
     }
 
     @Override
@@ -201,15 +189,25 @@ public class fragment_setoran extends Fragment implements mobil_view,rekapan_vie
 
 
     @Override
-    public void edit(int id, String foto,String tanngal_muat,String tanggal_bongkar,String berat_muat,String berat_bongkar,int transportir_id,int harga,String tujuan) {
+    public void edit(int id,
+                     String foto,
+                     String tanggal_muat,
+                     String tanggal_bongkar,
+                     int berat_muat,
+                     int berat_bongkar,
+                     int transportir_id,
+                     String nama_transportir,
+                     int harga,
+                     String tujuan) {
         Bundle args = new Bundle();
         args.putString("id", String.valueOf(id));
         args.putString("foto", foto);
-        args.putString("tanngal_muat", tanngal_muat);
+        args.putString("tanngal_muat", tanggal_muat);
         args.putString("tanggal_bongkar", tanggal_bongkar);
-        args.putString("berat_muat",berat_muat);
-        args.putString("berat_bongkar",berat_bongkar);
+        args.putString("berat_muat", String.valueOf(berat_muat));
+        args.putString("berat_bongkar", String.valueOf(berat_bongkar));
         args.putString("transportir_id", String.valueOf(transportir_id));
+        args.putString("nama_transportir", nama_transportir);
         args.putString("harga", String.valueOf(harga));
         args.putString("tujuan", tujuan);
         args.putString("jenis","edit");
@@ -334,13 +332,13 @@ public class fragment_setoran extends Fragment implements mobil_view,rekapan_vie
                             } else if (edit_tgl.getText().toString().trim().equals("")) {
                                 Toasty.error(getActivity(), "Tanggal Harus Di Isi", Toast.LENGTH_SHORT, true).show();
                             } else {
-                                rekapan.get_uang_jalan(tanggal, cari, jenis, id_sopir_new);
+                                setoran.get_setoran(id_sopir_new, cari, jenis, tanggal);
                             }
                         } else {
                             if (edit_nama.getText().toString().trim().equals("")) {
                                 Toasty.error(getActivity(), "Nama Sopir Harus Di Isi", Toast.LENGTH_SHORT, true).show();
                             } else {
-                                rekapan.get_uang_jalan(tanggal, cari, jenis, id_sopir_new);
+                                setoran.get_setoran(id_sopir_new, cari, jenis, tanggal);
                             }
                         }
                     }

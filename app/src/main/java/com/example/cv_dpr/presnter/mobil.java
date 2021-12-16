@@ -402,9 +402,6 @@ public class mobil {
                         String total_bersih = data.getTotalBersih();
                         String total_kasbon = data.getTotalKasbon();
                         String total_final = data.getTotalFinalBersih();
-
-
-
                         //Toast.makeText(ctx, ""+ response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         Log.i("isi_data", "onResponse: "+data);
                         if (data != null && data.getDataSetoran() != null) {

@@ -8,6 +8,7 @@
         <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_harga.xml" value="0.19010416666666666" />
         <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_home.xml" value="0.16" />
         <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_mobil.xml" value="0.20416666666666666" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_pembayaran.xml" value="0.20416666666666666" />
         <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_pemilik_mobil.xml" value="0.20416666666666666" />
         <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_pencairan.xml" value="0.20416666666666666" />
         <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_setoran.xml" value="0.25" />
@@ -15,6 +16,8 @@
         <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_uang_jalan.xml" value="0.25" />
         <entry key="..\:/CV_DPR/app/src/main/res/layout/activity_menu_utama.xml" value="0.2" />
         <entry key="..\:/CV_DPR/app/src/main/res/layout/dialog_setoran.xml" value="0.25" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/model_kasbon.xml" value="0.20416666666666666" />
+        <entry key="..\:/CV_DPR/app/src/main/res/layout/model_pemilik_mobil.xml" value="0.20102564102564102" />
         <entry key="..\:/CV_DPR/app/src/main/res/layout/model_setoran.xml" value="0.33" />
         <entry key="..\:/CV_DPR/app/src/main/res/layout/model_uang_jalan.xml" value="0.25" />
         <entry key="..\:/CV_DPR/app/src/main/res/layout/model_uang_jalan_new.xml" value="0.33" />
